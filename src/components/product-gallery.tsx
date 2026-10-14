@@ -83,27 +83,10 @@ export function ProductGallery({ photos, active, eyebrow, compact = false }: { p
           </>
         )}
       </div>
-      <div className={compact ? "min-h-30 p-3 sm:min-h-20" : eyebrow ? "min-h-52 p-5 sm:min-h-48" : "min-h-44 p-5"} aria-live={playing ? "off" : "polite"} aria-atomic="true">
+      <div className={compact ? "p-3" : "p-5"} aria-live={playing ? "off" : "polite"} aria-atomic="true">
         {eyebrow && <p className="eyebrow text-primary-soft">{eyebrow}</p>}
         <h3 className={compact ? "text-base font-black leading-6" : "mt-2 text-xl font-black leading-7 sm:text-2xl sm:leading-8"}>{current.title}</h3>
-        <p className={compact ? "mt-1 max-w-xl text-xs leading-5 text-background/75" : "mt-2 max-w-xl text-sm leading-6 text-background/75"}>{current.note}</p>
       </div>
-      {multiple && (
-        <div className={compact ? "grid grid-cols-4 gap-2 p-1.5" : "grid grid-cols-4 gap-2 p-2"}>
-          {photos.map((item, index) => (
-            <button
-              key={item.image}
-              type="button"
-              aria-label={`Show ${item.title}`}
-              aria-pressed={selected === index}
-              onClick={() => api?.scrollTo(index, reducedMotion)}
-              className={`aspect-[16/9] w-full overflow-hidden border-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-soft ${compact ? "max-w-20 justify-self-center" : ""} ${selected === index ? "border-primary-soft" : "border-transparent hover:border-background/50"}`}
-            >
-              <ProductPhoto src={item.image} alt="" />
-            </button>
-          ))}
-        </div>
-      )}
     </Carousel>
   );
 }
