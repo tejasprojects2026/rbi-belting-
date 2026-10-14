@@ -1,4 +1,20 @@
 export type PillarKey = "power-transmission" | "automation" | "adhesives";
+export const justdialReviews = {
+  title: "Customer reviews",
+  description: "Customer feedback on our products and service.",
+  invitationTitle: "Share your experience",
+  source: "Justdial",
+  scriptSrc: "https://www.justdial.com/Jd-Widget",
+  badgeStyle: "b1",
+  badgeCode: "Y3RyY3QlNDAlNDAlNDAwMjBQWFgyMCUyQlhYMjAlMkIxNzAxMDcxNjQ1NTUlMkJUNUQ0",
+  listingUrl: "https://www.justdial.com/Pune/R-B-International-Belting-Nr-Hotel-Sai-Palace-Bhosari-Industrial-Estate/020PXX20-XX20-170107164555-T5D4_BZDET",
+  linkLabel: "Read reviews",
+  linkAccessibleLabel: "Read reviews on Justdial",
+  reviewCount: 483,
+  reviewCountLabel: "reviews",
+  loadingText: "Loading Justdial reviews...",
+  unavailableText: "Read our customer reviews directly on Justdial.",
+};
 export type SubCategory = { slug: string; name: string; short: string; types: string[]; brands: string[]; applications: string };
 export type Pillar = { key: PillarKey; name: string; kicker: string; description: string; image: "power" | "automation" | "adhesives"; subcategories: SubCategory[]; brands: string[] };
 const typeDescriptions: Record<string,string> = {

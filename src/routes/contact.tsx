@@ -10,6 +10,7 @@ import {
 import { EnquiryForm } from "@/components/enquiry";
 import { PageHero } from "@/components/page-sections";
 import { breadcrumbSchema, pageHead } from "@/lib/seo";
+import { justdialReviews } from "@/lib/site-data";
 import hero from "@/assets/factory-hero.jpg";
 
 const local = {
@@ -124,7 +125,7 @@ function Contact() {
               <span className="text-sm text-background/60">Bhosari Industrial Estate, Pune</span>
             </a>
             <a
-              href="https://www.justdial.com/Pune/R-B-International-Belting-Nr-Hotel-Sai-Palace-Bhosari-Industrial-Estate/020PXX20-XX20-170107164555-T5D4_BZDET"
+              href={justdialReviews.listingUrl}
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-3 border border-border bg-background p-5"
@@ -132,7 +133,7 @@ function Contact() {
               <Star className="fill-primary text-primary" />
               <span>
                 <strong className="block">Rated 5.0 on JustDial</strong>
-                <small>483 reviews</small>
+                <small>{justdialReviews.reviewCount} {justdialReviews.reviewCountLabel}</small>
               </span>
             </a>
           </aside>
