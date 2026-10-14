@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { BrandStrip, PillarCards, SectionHeading } from "@/components/page-sections";
 import { EnquiryDialog } from "@/components/enquiry";
-import { allBrands, industries } from "@/lib/site-data";
+import { allBrands, industries, logoBrands } from "@/lib/site-data";
 import { pageHead } from "@/lib/seo";
 import hero from "@/assets/factory-hero.jpg";
 
@@ -138,7 +138,7 @@ function Home() {
               </>
             }
           />
-          <BrandStrip brands={featuredBrands} />
+          <BrandStrip brands={logoBrands} />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {featuredBrands.map((brand) => (
               <div key={brand} className="border border-background/20 p-5 text-center">

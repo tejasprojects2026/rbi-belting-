@@ -8,7 +8,7 @@ import { Dialog,DialogContent,DialogDescription,DialogHeader,DialogTitle } from 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EMAIL,EnquiryForm,EnquiryDialog } from "@/components/enquiry";
-import { describeType,pillarList,type Pillar,type SubCategory } from "@/lib/site-data";
+import { describeType,getBrandLogo,pillarList,type Pillar,type SubCategory } from "@/lib/site-data";
 import powerImg from "@/assets/power-transmission.jpg";import automationImg from "@/assets/automation.jpg";import adhesivesImg from "@/assets/adhesives.jpg";
 import classicalImg from "@/assets/v-belts/classical-clean.jpg";import coggedImg from "@/assets/v-belts/cogged-clean.jpg";import bandedImg from "@/assets/v-belts/banded-clean.jpg";import narrowImg from "@/assets/v-belts/narrow-clean.jpg";
 const images={power:powerImg,automation:automationImg,adhesives:adhesivesImg};
@@ -60,11 +60,21 @@ export function BrandStrip({ brands }: { brands: string[] }) {
       }}
     >
       <CarouselContent className="ml-0 touch-pan-y" aria-live="off">
-        {slides.map((brand, index) => (
+        {slides.map((brand, index) => {
+          const logo = getBrandLogo(brand);
+          return (
           <CarouselItem key={`${brand}-${index}`} className="basis-1/2 pl-0 sm:basis-1/3 lg:basis-1/4" aria-label={brand}>
-            <div className="brand-tile">{brand}</div>
+            <div className="brand-tile">
+              {logo ? <>
+                <div className="brand-logo-frame">
+                  <img src={logo.src} alt={`${brand} logo`} width={180} height={88} loading="lazy" decoding="async" draggable={false} style={{ objectFit: logo.fit ?? "contain", objectPosition: logo.position ?? "center" }} />
+                </div>
+                <span className="brand-tile-label">{brand}</span>
+              </> : <span>{brand}</span>}
+            </div>
           </CarouselItem>
-        ))}
+          );
+        })}
       </CarouselContent>
       <div className="mt-3 flex justify-end gap-2">
         <CarouselPrevious className={controlClass} title="Previous brands" />

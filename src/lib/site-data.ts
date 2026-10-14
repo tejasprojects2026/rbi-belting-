@@ -1,4 +1,46 @@
 export type PillarKey = "power-transmission" | "automation" | "adhesives";
+type BrandLogo = { src: string; fit?: "contain" | "cover"; position?: string };
+export const brandLogos: Record<string, BrandLogo> = {
+  "Gates": { src: "/brand-logos/gates.svg" },
+  "Fenner": { src: "/brand-logos/fenner.png" },
+  "PIX": { src: "/brand-logos/pix.png", fit: "cover", position: "center 55%" },
+  "Pidilite": { src: "/brand-logos/pidilite.avif" },
+  "Optibelt": { src: "/brand-logos/optibelt.jpeg" },
+  "Goodyear": { src: "/brand-logos/goodyear.png" },
+  "Continental ContiTech": { src: "/brand-logos/continental-contitech.png" },
+  "Megadyne": { src: "/brand-logos/megadyne.png", fit: "cover" },
+  "Carlisle": { src: "/brand-logos/carlisle.jpg" },
+  "Hutchinson": { src: "/brand-logos/hutchinson.jpg", fit: "cover" },
+  "Mitsuboshi": { src: "/brand-logos/mitsuboshi.png" },
+  "Polymaxx": { src: "/brand-logos/polymaxx.png" },
+  "Loctite": { src: "/brand-logos/loctite.png", fit: "cover" },
+  "3M": { src: "/brand-logos/3m.png", fit: "cover" },
+  "Anabond": { src: "/brand-logos/anabond.png", fit: "cover", position: "center 40%" },
+  "Araldite": { src: "/brand-logos/araldite.jpeg", fit: "cover" },
+  "Amico": { src: "/brand-logos/amico.jpg" },
+  "Speb 7": { src: "/brand-logos/speb7.png", fit: "cover" },
+  "WD-40": { src: "/brand-logos/wd40.avif" },
+  "Arofine Polymers": { src: "/brand-logos/arofine-polymers.png", fit: "cover" },
+  "SAV Chemicals": { src: "/brand-logos/sav-chemicals.png", fit: "cover" },
+  "Atul": { src: "/brand-logos/atul.svg" },
+  "Metlok": { src: "/brand-logos/metlok.jpeg", fit: "cover", position: "center 45%" },
+  "Bondtite": { src: "/brand-logos/bondtite.webp", fit: "cover" },
+  "Dr. Fixit": { src: "/brand-logos/dr-fixit.png" },
+  "Fevicol": { src: "/brand-logos/fevicol.jpg", fit: "cover" },
+  "Ecodrive": { src: "/brand-logos/ecodrive.png" },
+  "Lapox": { src: "/brand-logos/lapox.png", fit: "cover" },
+  "Lord Adhesive": { src: "/brand-logos/lord.webp", fit: "cover" },
+  "M-Seal": { src: "/brand-logos/m-seal.jpg" },
+  "MxBon": { src: "/brand-logos/mxbon.png" },
+  "Polygrip": { src: "/brand-logos/polygrip.webp", fit: "cover" },
+};
+const brandLogoAliases: Record<string, string> = {
+  "Goodyear Eagle NRG": "Goodyear",
+  "Pidilite IBS": "Pidilite",
+  "Bond Tide": "Bondtite",
+};
+export const logoBrands = Object.keys(brandLogos);
+export const getBrandLogo = (brand: string) => brandLogos[brandLogoAliases[brand] ?? brand];
 export const justdialReviews = {
   title: "Customer reviews",
   description: "Customer feedback on our products and service.",
