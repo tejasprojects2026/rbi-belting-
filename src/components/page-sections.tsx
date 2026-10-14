@@ -22,8 +22,6 @@ export function PillarCards(){return <div className="grid gap-5 lg:grid-cols-3">
 export function BrandStrip({ brands }: { brands: string[] }) {
   const [api, setApi] = useState<CarouselApi>();
   const [playing, setPlaying] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -34,12 +32,12 @@ export function BrandStrip({ brands }: { brands: string[] }) {
   }, []);
 
   useEffect(() => {
-    if (!api || !playing || hovered || focused) return;
+    if (!api || !playing) return;
     const timer = window.setInterval(() => {
       if (!document.hidden) api.scrollNext();
     }, 3000);
     return () => window.clearInterval(timer);
-  }, [api, playing, hovered, focused]);
+  }, [api, playing]);
 
   if (!brands.length) return null;
   // Extra slides keep short brand lists looping even with four tiles visible.
@@ -52,11 +50,8 @@ export function BrandStrip({ brands }: { brands: string[] }) {
       setApi={setApi}
       className="brand-strip min-w-0"
       aria-label="Available brands"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
+      onFocusCapture={(event) => {
+        if (event.target.matches(":focus-visible")) setPlaying(false);
       }}
     >
       <CarouselContent className="ml-0 touch-pan-y" aria-live="off">
