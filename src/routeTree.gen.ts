@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdhesivesRouteImport } from './routes/adhesives'
 import { Route as AutomationRouteImport } from './routes/automation'
-import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FranchiseRouteImport } from './routes/franchise'
 import { Route as PowerTransmissionRouteImport } from './routes/power-transmission'
@@ -39,11 +38,6 @@ const AdhesivesRoute = AdhesivesRouteImport.update({
 const AutomationRoute = AutomationRouteImport.update({
   id: '/automation',
   path: '/automation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrandsRoute = BrandsRouteImport.update({
-  id: '/brands',
-  path: '/brands',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -82,7 +76,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/adhesives': typeof AdhesivesRouteWithChildren
   '/automation': typeof AutomationRouteWithChildren
-  '/brands': typeof BrandsRoute
   '/contact': typeof ContactRoute
   '/franchise': typeof FranchiseRoute
   '/power-transmission': typeof PowerTransmissionRouteWithChildren
@@ -95,7 +88,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/adhesives': typeof AdhesivesRouteWithChildren
   '/automation': typeof AutomationRouteWithChildren
-  '/brands': typeof BrandsRoute
   '/contact': typeof ContactRoute
   '/franchise': typeof FranchiseRoute
   '/power-transmission': typeof PowerTransmissionRouteWithChildren
@@ -109,7 +101,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/adhesives': typeof AdhesivesRouteWithChildren
   '/automation': typeof AutomationRouteWithChildren
-  '/brands': typeof BrandsRoute
   '/contact': typeof ContactRoute
   '/franchise': typeof FranchiseRoute
   '/power-transmission': typeof PowerTransmissionRouteWithChildren
@@ -124,7 +115,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/adhesives'
     | '/automation'
-    | '/brands'
     | '/contact'
     | '/franchise'
     | '/power-transmission'
@@ -137,7 +127,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/adhesives'
     | '/automation'
-    | '/brands'
     | '/contact'
     | '/franchise'
     | '/power-transmission'
@@ -150,7 +139,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/adhesives'
     | '/automation'
-    | '/brands'
     | '/contact'
     | '/franchise'
     | '/power-transmission'
@@ -164,7 +152,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdhesivesRoute: typeof AdhesivesRouteWithChildren
   AutomationRoute: typeof AutomationRouteWithChildren
-  BrandsRoute: typeof BrandsRoute
   ContactRoute: typeof ContactRoute
   FranchiseRoute: typeof FranchiseRoute
   PowerTransmissionRoute: typeof PowerTransmissionRouteWithChildren
@@ -198,13 +185,6 @@ declare module '@tanstack/react-router' {
       path: '/automation'
       fullPath: '/automation'
       preLoaderRoute: typeof AutomationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/brands': {
-      id: '/brands'
-      path: '/brands'
-      fullPath: '/brands'
-      preLoaderRoute: typeof BrandsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -292,7 +272,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdhesivesRoute: AdhesivesRouteWithChildren,
   AutomationRoute: AutomationRouteWithChildren,
-  BrandsRoute: BrandsRoute,
   ContactRoute: ContactRoute,
   FranchiseRoute: FranchiseRoute,
   PowerTransmissionRoute: PowerTransmissionRouteWithChildren,

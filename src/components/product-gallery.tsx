@@ -17,12 +17,12 @@ export function ProductGallery({ photos, active, eyebrow, compact = false }: { p
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => {
       setReducedMotion(motion.matches);
-      setPlaying(!motion.matches);
+      setPlaying(!compact && !motion.matches);
     };
     update();
     motion.addEventListener("change", update);
     return () => motion.removeEventListener("change", update);
-  }, [active]);
+  }, [active, compact]);
 
   useEffect(() => {
     if (!api) return;
@@ -53,14 +53,14 @@ export function ProductGallery({ photos, active, eyebrow, compact = false }: { p
     <Carousel
       opts={{ loop: multiple, align: "start", duration: reducedMotion ? 0 : 20 }}
       setApi={setApi}
-      className="min-w-0 bg-foreground text-background"
+      className={compact ? "min-w-0 overflow-hidden rounded-md border border-border bg-background text-foreground" : "min-w-0 bg-foreground text-background"}
       aria-label="Product photos"
     >
       <div className="relative">
         <CarouselContent className="ml-0 touch-pan-y" aria-live="off">
           {photos.map((item, index) => (
-            <CarouselItem key={item.image} className="aspect-[16/9] pl-0" aria-hidden={selected !== index} aria-label={`${index + 1} of ${photos.length}: ${item.title}`}>
-              <ProductPhoto src={item.image} alt={item.title} />
+            <CarouselItem key={item.image} className={compact ? "h-44 bg-muted pl-0 sm:h-52" : "aspect-[16/9] pl-0"} aria-hidden={selected !== index} aria-label={`${index + 1} of ${photos.length}: ${item.title}`}>
+              <ProductPhoto src={item.image} alt={item.title} fit={compact ? "contain" : "cover"} />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -68,7 +68,7 @@ export function ProductGallery({ photos, active, eyebrow, compact = false }: { p
           <>
             <CarouselPrevious className={`${arrowClass} left-3`} aria-label="Previous product image" title="Previous product image" />
             <CarouselNext className={`${arrowClass} right-3`} aria-label="Next product image" title="Next product image" />
-            <span className="absolute bottom-3 left-3 bg-foreground/75 px-2 py-1 text-xs font-bold tabular-nums">{selected + 1} / {photos.length}</span>
+            <span className="absolute bottom-3 left-3 bg-foreground/75 px-2 py-1 text-xs font-bold tabular-nums text-background">{selected + 1} / {photos.length}</span>
             <Button
               type="button"
               variant="secondary"
@@ -85,8 +85,24 @@ export function ProductGallery({ photos, active, eyebrow, compact = false }: { p
       </div>
       <div className={compact ? "p-3" : "p-5"} aria-live={playing ? "off" : "polite"} aria-atomic="true">
         {eyebrow && <p className="eyebrow text-primary-soft">{eyebrow}</p>}
-        <h3 className={compact ? "text-base font-black leading-6" : "mt-2 text-xl font-black leading-7 sm:text-2xl sm:leading-8"}>{current.title}</h3>
+        <h3 className={compact ? "text-center text-base font-black leading-6" : "mt-2 text-xl font-black leading-7 sm:text-2xl sm:leading-8"}>{current.title}</h3>
       </div>
+      {compact && multiple && (
+        <div className="grid grid-cols-4 gap-2 border-t border-border p-3" role="group" aria-label="Choose a product image">
+          {photos.map((item, index) => (
+            <button
+              key={item.image}
+              type="button"
+              aria-label={`Show ${item.title}`}
+              aria-pressed={selected === index}
+              onClick={() => { setPlaying(false); api?.scrollTo(index); }}
+              className={`overflow-hidden rounded-sm border-2 bg-muted p-0.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-category focus-visible:ring-offset-2 ${selected === index ? "border-category" : "border-transparent hover:border-category/50"}`}
+            >
+              <img src={item.image} alt="" width={96} height={48} loading="lazy" className="h-11 w-full object-contain" />
+            </button>
+          ))}
+        </div>
+      )}
     </Carousel>
   );
 }

@@ -1,0 +1,3 @@
+Tool: built-in image_gen, transparent_background=true
+
+Use case: background-extraction. Asset type: existing website carousel logo PNG. Edit target: the referenced TOCO logo image. Remove all white, pale gray and textured background, including inside the letter counters, leaving only the original blue TOCO wordmark on a genuinely transparent alpha background. Preserve the exact italic letter shapes, spacing, proportions, sharp edges and blue color; do not redesign or add anything. No shadows or backdrop, no extra marks. Center the complete wordmark on a wide landscape canvas with modest transparent margins, suitable for contain-fit display in a logo strip.

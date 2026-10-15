@@ -12,7 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { BrandStrip, PillarCards, SectionHeading } from "@/components/page-sections";
 import { EnquiryDialog } from "@/components/enquiry";
-import { allBrands, industries, logoBrands } from "@/lib/site-data";
+import { DealerRelationships } from "@/components/dealer-relationships";
+import { IndustryShowcase } from "@/components/industry-showcase";
+import { allBrands, logoBrands, upcomingRange } from "@/lib/site-data";
 import { pageHead } from "@/lib/seo";
 import hero from "@/assets/factory-hero.jpg";
 
@@ -40,7 +42,6 @@ const stats = [
   ["PAN India", "+ Export service"],
 ];
 
-const featuredBrands = ["Gates", "Fenner", "PIX", "Pidilite"];
 const brandThemes = [
   "border-primary/25 bg-primary/10 text-primary",
   "border-foreground/10 bg-muted text-foreground",
@@ -95,7 +96,7 @@ function Home() {
                   onClick={() => setOpen(true)}
                 >
                   <MessageSquareText />
-                  Get a quote
+                  Enquire Now
                 </Button>
               </div>
             </div>
@@ -139,33 +140,53 @@ function Home() {
             }
           />
           <BrandStrip brands={logoBrands} />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredBrands.map((brand) => (
-              <div key={brand} className="border border-background/20 p-5 text-center">
-                <div className="grid h-20 place-items-center bg-background/5 text-xl font-black">{brand}</div>
-                <p className="mt-4 text-xs font-bold uppercase text-background/60">Stock and supply support</p>
-              </div>
-            ))}
-          </div>
+          <section className="mt-12 md:mt-16" aria-label="Dealer relationships">
+            <DealerRelationships />
+          </section>
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="site-container">
-          <SectionHeading eyebrow="Industry coverage" title="Trusted across manufacturing sectors" />
-          <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((industry) => (
-              <article key={industry} className="bg-background p-7">
-                <Factory className="text-primary" />
-                <h3 className="mt-5 text-lg font-black">{industry}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  Belting, motion control and maintenance products selected for your production environment.
-                </p>
-              </article>
-            ))}
+      <section className="pb-6 pt-20" aria-label={upcomingRange.title}>
+        <div className="site-container grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-10">
+          <div className="min-w-0">
+            <SectionHeading
+              eyebrow={upcomingRange.eyebrow}
+              title={upcomingRange.title}
+              text={upcomingRange.description}
+            />
+            <div className="flex justify-center">
+              <Button asChild>
+                <a href={upcomingRange.href}>{upcomingRange.linkLabel}</a>
+              </Button>
+            </div>
           </div>
+          <aside aria-labelledby="upcoming-range-details" className="min-w-0 border border-border border-t-4 border-t-primary bg-muted/60 p-6 shadow-sm sm:p-7">
+            <h3 id="upcoming-range-details" className="text-2xl font-black leading-tight">{upcomingRange.detailsTitle}</h3>
+            <div className="mt-5 space-y-5">
+              {upcomingRange.focusAreas.map((item, index) => {
+                const Icon = index === 0 ? Factory : PackageCheck;
+                return (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <div className="grid size-10 shrink-0 place-items-center border border-primary/15 bg-primary/5 text-primary">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h4 className="font-black leading-6">{item.title}</h4>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-5 border-t border-border pt-4">
+              <h4 className="text-sm font-black text-primary">{upcomingRange.interestTitle}</h4>
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">{upcomingRange.interestDescription}</p>
+            </div>
+          </aside>
         </div>
       </section>
+
+      <IndustryShowcase />
 
       <section className="pattern-shared bg-muted py-20">
         <div className="site-container">
@@ -211,7 +232,8 @@ function Home() {
         </div>
       </section>
 
-      <section className="pattern-shared py-16">
+      {/* Temporarily hidden; remove the hidden attribute to restore the brand network. */}
+      <section hidden className="pattern-shared py-16">
         <div className="site-container">
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div>

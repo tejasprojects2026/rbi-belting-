@@ -1,5 +1,58 @@
 export type PillarKey = "power-transmission" | "automation" | "adhesives";
-type BrandLogo = { src: string; fit?: "contain" | "cover"; position?: string };
+export const footerContact = { email: "sales@rbcorp.in", gst: "27AAHFR3595G1ZU" };
+export const companyHistory = {
+  eyebrow: "Milestones",
+  title: "From a belting shop to three industrial divisions",
+  description: "The timeline below contains approximate milestones and will be confirmed before final publication.",
+  milestones: [
+    { year: "2003", description: "Founded in Bhosari, Pune as a belting supply firm." },
+    { year: "2006", description: "Built authorized dealer relationships with major belting brands." },
+    { year: "2010", description: "Expanded into industrial adhesives through RB Adhesive Company." },
+    { year: "2014", description: "Added automation and motion control products." },
+    { year: "2018", description: "Crossed 300 active client accounts across Maharashtra." },
+    { year: "2020", description: "Expanded service to PAN India and international markets." },
+    { year: "2023", description: "Completed 20 years with 500+ active clients and 50+ brand relationships." },
+  ],
+} as const;
+export const brochureContent = {
+  description: "Share your details to request the latest product brochure.",
+};
+export const productRangeContent = {
+  typesTitle: "Available product types",
+  applicationsTitle: "Applications",
+  brandsTitle: "Available brands",
+  quoteTitle: "For faster quotation",
+  quoteDetails: [
+    "Existing size, marking or part number",
+    "Preferred brand or equivalent options",
+    "Quantity, application and machine type",
+    "Delivery location and urgency",
+  ],
+  benefits: ["Genuine brands", "Selection support", "PAN India supply"],
+  enquiryHint: "Share your requirement for selection and pricing.",
+  enquiryLabel: "Enquire now",
+};
+export const upcomingRange = {
+  eyebrow: "Coming soon",
+  title: "RB International: our own range",
+  description: "We are developing our own line of automation components and select belting products. Register interest with our team.",
+  linkLabel: "Register interest",
+  href: "/contact",
+  detailsTitle: "What we're developing",
+  focusAreas: [
+    {
+      title: "Automation components",
+      description: "A planned range for machinery and motion control applications.",
+    },
+    {
+      title: "Selected belting products",
+      description: "Belting options for industrial equipment and maintenance needs.",
+    },
+  ],
+  interestTitle: "Help shape the range",
+  interestDescription: "Share your application, required sizes and expected quantities when you register your interest.",
+};
+type BrandLogo = { src: string; fit?: "contain" | "cover"; position?: string; scale?: number };
 export const brandLogos: Record<string, BrandLogo> = {
   "Gates": { src: "/brand-logos/gates.svg" },
   "Fenner": { src: "/brand-logos/fenner.png" },
@@ -33,6 +86,13 @@ export const brandLogos: Record<string, BrandLogo> = {
   "M-Seal": { src: "/brand-logos/m-seal.jpg" },
   "MxBon": { src: "/brand-logos/mxbon.png" },
   "Polygrip": { src: "/brand-logos/polygrip.webp", fit: "cover" },
+  "Bando": { src: "/brand-logos/bando.png", fit: "cover" },
+  "Nitta": { src: "/brand-logos/nitta.png" },
+  "Habasit": { src: "/brand-logos/habasit.png", scale: 1.65 },
+  "TOCO": { src: "/brand-logos/toco-transparent.png" },
+  "THK": { src: "/brand-logos/thk.png", fit: "cover" },
+  "HIWIN": { src: "/brand-logos/hiwin.png" },
+  "Rexroth": { src: "/brand-logos/rexroth.png" },
 };
 const brandLogoAliases: Record<string, string> = {
   "Goodyear Eagle NRG": "Goodyear",
@@ -40,6 +100,13 @@ const brandLogoAliases: Record<string, string> = {
   "Bond Tide": "Bondtite",
 };
 export const logoBrands = Object.keys(brandLogos);
+export const dealerRelationships = {
+  eyebrow: "Dealer relationships",
+  title: "Authorized dealers and distributors",
+  brands: ["Gates", "Fenner", "PIX", "Pidilite"],
+  certificateLabel: "Authorized Dealer Certificate",
+  certificateNote: "Certificate image and start year placeholder.",
+};
 export const getBrandLogo = (brand: string) => brandLogos[brandLogoAliases[brand] ?? brand];
 export const justdialReviews = {
   title: "Customer reviews",
@@ -57,6 +124,35 @@ export const justdialReviews = {
   loadingText: "Loading Justdial reviews...",
   unavailableText: "Read our customer reviews directly on Justdial.",
 };
+export const reviewPlatforms = [
+  {
+    id: "justdial",
+    source: justdialReviews.source,
+    title: justdialReviews.title,
+    description: justdialReviews.description,
+    listingUrl: justdialReviews.listingUrl,
+    linkLabel: justdialReviews.linkLabel,
+    linkAccessibleLabel: justdialReviews.linkAccessibleLabel,
+  },
+  {
+    id: "google",
+    source: "Google",
+    title: "Customer reviews",
+    description: "Read customer feedback and share your experience on Google.",
+    listingUrl: "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
+    linkLabel: "Read reviews",
+    linkAccessibleLabel: "View RB International on Google Maps",
+  },
+  {
+    id: "indiamart",
+    source: "IndiaMART",
+    title: "Products & enquiries",
+    description: "Explore our industrial products and connect with us on IndiaMART.",
+    listingUrl: "https://m.indiamart.com/r-btraders-pune/profile.html",
+    linkLabel: "View profile",
+    linkAccessibleLabel: "View our business profile on IndiaMART",
+  },
+] as const;
 export type SubCategory = { slug: string; name: string; short: string; types: string[]; brands: string[]; applications: string };
 export type Pillar = { key: PillarKey; name: string; kicker: string; description: string; image: "power" | "automation" | "adhesives"; subcategories: SubCategory[]; brands: string[] };
 const typeDescriptions: Record<string,string> = {
@@ -93,6 +189,21 @@ export const pillars: Record<PillarKey,Pillar> = {
 };
 export const pillarList=Object.values(pillars);
 export const allBrands=Array.from(new Set(pillarList.flatMap(p=>p.brands)));
-export const industries=["Automotive & Auto Components","Food & Beverage Processing","Packaging & Printing","Pharmaceuticals","Textiles & Garments","Cement, Mining & Heavy Industries","Logistics, Warehousing & Material Handling","OEM & Machine Building","General Manufacturing & Job Shops"];
-export const navItems=[{label:"Home",to:"/"},{label:"About",to:"/about"},{label:"Power Transmission",to:"/power-transmission"},{label:"Automation",to:"/automation"},{label:"Adhesives",to:"/adhesives"},{label:"Brands",to:"/brands"},{label:"Contact",to:"/contact"},{label:"Franchise",to:"/franchise"}] as const;
+export const industryCoverage = {
+  eyebrow: "Industry coverage",
+  title: "Trusted across manufacturing sectors",
+  instruction: "Select an industry to explore how we support your production.",
+};
+export const industries = [
+  { name: "Automotive & Auto Components", image: "factory", description: "Belts, drives and motion components for assembly lines and automotive production equipment." },
+  { name: "Food & Beverage Processing", image: "belting", description: "Conveyor and drive belt selection for processing, bottling and handling equipment." },
+  { name: "Packaging & Printing", image: "automation", description: "Timing belts, motion components and adhesives for packaging and printing machinery." },
+  { name: "Pharmaceuticals", image: "automation", description: "Belting and motion components for filling, labelling and packaging equipment." },
+  { name: "Textiles & Garments", image: "belting", description: "Drive belts and transmission components for spinning, weaving and textile processing machinery." },
+  { name: "Cement, Mining & Heavy Industries", image: "belting", description: "Belts, pulleys and couplings for demanding drives and bulk material handling equipment." },
+  { name: "Logistics, Warehousing & Material Handling", image: "automation", description: "Conveyor belts and motion components for sorting, conveying and warehouse handling systems." },
+  { name: "OEM & Machine Building", image: "automation", description: "Belting, linear motion and drive components for new machines and equipment upgrades." },
+  { name: "General Manufacturing & Job Shops", image: "factory", description: "Replacement belts, maintenance adhesives and drive components for everyday workshop needs." },
+] as const;
+export const navItems=[{label:"Home",to:"/"},{label:"About",to:"/about"},{label:"Power Transmission",to:"/power-transmission"},{label:"Automation",to:"/automation"},{label:"Adhesives",to:"/adhesives"},{label:"Contact",to:"/contact"},{label:"Franchise",to:"/franchise"}] as const;
 export const searchItems=pillarList.flatMap(p=>p.subcategories.flatMap(s=>[{name:s.name,to:`/${p.key}/${s.slug}`,keywords:[s.name,...s.types,...s.brands].join(" ").toLowerCase()},...s.types.map(t=>({name:t,to:`/${p.key}/${s.slug}`,keywords:`${t} ${s.name} ${s.brands.join(" ")}`.toLowerCase()}))]));

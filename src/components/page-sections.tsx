@@ -8,7 +8,7 @@ import { Dialog,DialogContent,DialogDescription,DialogHeader,DialogTitle } from 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EMAIL,EnquiryForm,EnquiryDialog } from "@/components/enquiry";
-import { describeType,getBrandLogo,pillarList,type Pillar,type SubCategory } from "@/lib/site-data";
+import { brochureContent,describeType,getBrandLogo,pillarList,productRangeContent,type Pillar,type SubCategory } from "@/lib/site-data";
 import powerImg from "@/assets/power-transmission.jpg";import automationImg from "@/assets/automation.jpg";import adhesivesImg from "@/assets/adhesives.jpg";
 import classicalImg from "@/assets/v-belts/classical-clean.jpg";import coggedImg from "@/assets/v-belts/cogged-clean.jpg";import bandedImg from "@/assets/v-belts/banded-clean.jpg";import narrowImg from "@/assets/v-belts/narrow-clean.jpg";
 const images={power:powerImg,automation:automationImg,adhesives:adhesivesImg};
@@ -62,7 +62,7 @@ export function BrandStrip({ brands }: { brands: string[] }) {
             <div className="brand-tile">
               {logo ? <>
                 <div className="brand-logo-frame">
-                  <img src={logo.src} alt={`${brand} logo`} width={180} height={88} loading="lazy" decoding="async" draggable={false} style={{ objectFit: logo.fit ?? "contain", objectPosition: logo.position ?? "center" }} />
+                  <img src={logo.src} alt={`${brand} logo`} width={180} height={88} loading="lazy" decoding="async" draggable={false} style={{ objectFit: logo.fit ?? "contain", objectPosition: logo.position ?? "center", transform: logo.scale ? `scale(${logo.scale})` : undefined }} />
                 </div>
                 <span className="brand-tile-label">{brand}</span>
               </> : <span>{brand}</span>}
@@ -93,35 +93,55 @@ export function CategoryGrid({pillar}:{pillar:Pillar}){const [selected,setSelect
 function ProductRangeDialog({pillar,sub,open,onOpenChange,onEnquire}:{pillar:Pillar;sub:SubCategory|null;open:boolean;onOpenChange:(open:boolean)=>void;onEnquire:(sub:SubCategory)=>void}){
 if(!sub)return null;
 const photos=rangePhotos(pillar,sub);
-const quoteDetails=["Existing size, marking or part number","Preferred brand or equivalent options","Quantity, application and machine type","Delivery location and urgency"];
 return (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className={`theme-${pillar.key} flex max-h-[96dvh] w-[calc(100%-1rem)] flex-col gap-0 overflow-hidden p-0 sm:max-w-4xl`}>
-      <DialogHeader className="shrink-0 border-b border-border p-3 pr-12 text-left">
+    <DialogContent className={`theme-${pillar.key} flex max-h-[90dvh] w-[calc(100%-1.5rem)] max-w-5xl flex-col gap-0 overflow-hidden p-0 sm:max-w-5xl [&>button]:grid [&>button]:size-10 [&>button]:place-items-center [&>button]:bg-muted`}>
+      <DialogHeader className="shrink-0 border-b border-border p-4 pr-16 text-left sm:p-5 sm:pr-16">
         <p className="eyebrow">{pillar.name}</p>
-        <DialogTitle className="text-2xl font-black leading-tight">{sub.name}</DialogTitle>
-        <DialogDescription className="sr-only">{sub.short}</DialogDescription>
+        <DialogTitle className="text-2xl font-black leading-tight sm:text-3xl">{sub.name}</DialogTitle>
+        <DialogDescription className="text-sm leading-6 text-foreground/75">{sub.short}</DialogDescription>
       </DialogHeader>
-      <div className="min-h-0 overflow-y-auto overscroll-contain">
-        <ProductGallery key={sub.slug} photos={photos} active={open} compact />
-        <div className="px-4 py-2">
-          <h3 className="text-xs font-black uppercase text-muted-foreground">Available product types</h3>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {sub.types.map(type => <span key={type} className="border border-category/25 bg-category/10 px-2 py-1 text-[11px] font-bold text-category">{type}</span>)}
+      <div className="min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-5">
+        <div className="grid gap-5 md:grid-cols-[0.9fr_1.1fr]">
+          <div className="min-w-0">
+            <ProductGallery key={sub.slug} photos={photos} active={open} compact />
+            <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-foreground/80">
+              {productRangeContent.benefits.map(item => (
+                <li key={item} className="inline-flex items-center gap-1.5"><CheckCircle2 className="size-4 shrink-0 text-category" aria-hidden="true" />{item}</li>
+              ))}
+            </ul>
           </div>
-          <section className="mt-3 border-t border-border pt-3" aria-label="Product details">
-            <h3 className="mb-3 text-xs font-black uppercase text-muted-foreground">Product details</h3>
-            <div className="space-y-4 pb-3 text-sm leading-6">
-              <div><h4 className="flex items-center gap-2 font-black"><Factory className="size-4 text-category" />Applications</h4><p className="mt-1 text-muted-foreground">{sub.applications}</p></div>
-              <div><h4 className="flex items-center gap-2 font-black"><Tags className="size-4 text-category" />Brands</h4><p className="mt-1 text-muted-foreground">{sub.brands.join(", ")}</p></div>
-              <div><h4 className="font-black">For faster quotation</h4><div className="mt-2 space-y-1.5">{quoteDetails.map(item => <p key={item} className="flex gap-2 text-muted-foreground"><CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-category" /><span>{item}</span></p>)}</div></div>
-              <div className="flex flex-wrap gap-x-4 gap-y-1 font-semibold text-category">{["Genuine brands", "Selection support", "PAN India supply"].map(item => <span key={item}>{item}</span>)}</div>
-            </div>
-          </section>
+          <div className="min-w-0 space-y-5">
+            <section aria-labelledby="range-product-types">
+              <h3 id="range-product-types" className="text-base font-black">{productRangeContent.typesTitle}</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {sub.types.map(type => <li key={type} className="rounded-sm border border-category/20 bg-category/5 px-3 py-1.5 text-sm font-semibold leading-5 text-category">{type}</li>)}
+              </ul>
+            </section>
+            <section className="rounded-md border border-border bg-muted/50 p-4" aria-labelledby="range-applications">
+              <h3 id="range-applications" className="flex items-center gap-2 text-base font-black"><Factory className="size-4 text-category" aria-hidden="true" />{productRangeContent.applicationsTitle}</h3>
+              <p className="mt-2 text-sm leading-6 text-foreground/80">{sub.applications}</p>
+            </section>
+            <section aria-labelledby="range-brands">
+              <h3 id="range-brands" className="flex items-center gap-2 text-base font-black"><Tags className="size-4 text-category" aria-hidden="true" />{productRangeContent.brandsTitle}</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {sub.brands.map(brand => <li key={brand} className="rounded-sm border border-border bg-background px-2.5 py-1 text-sm font-semibold leading-5">{brand}</li>)}
+              </ul>
+            </section>
+          </div>
         </div>
+        <details className="mt-5 rounded-md border border-border bg-muted/30 p-4">
+          <summary className="cursor-pointer text-sm font-bold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-category">{productRangeContent.quoteTitle}</summary>
+          <ul className="mt-3 grid gap-3 text-sm leading-6 text-foreground/80 sm:grid-cols-2">
+            {productRangeContent.quoteDetails.map(item => (
+              <li key={item} className="flex items-start gap-2"><CheckCircle2 className="mt-1 size-4 shrink-0 text-category" aria-hidden="true" /><span>{item}</span></li>
+            ))}
+          </ul>
+        </details>
       </div>
-      <div className="shrink-0 border-t border-border bg-background p-2">
-        <Button type="button" size="lg" className="h-11 w-full" onClick={() => onEnquire(sub)}><MessageSquareText />Enquire now</Button>
+      <div className="flex shrink-0 flex-col gap-3 border-t border-border bg-background p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+        <p className="hidden text-sm leading-5 text-foreground/75 sm:block">{productRangeContent.enquiryHint}</p>
+        <Button type="button" size="lg" className="h-11 w-full shrink-0 sm:w-auto" onClick={() => onEnquire(sub)}><MessageSquareText />{productRangeContent.enquiryLabel}</Button>
       </div>
     </DialogContent>
   </Dialog>
@@ -137,7 +157,7 @@ let pdf="%PDF-1.4\n";const offsets=[0];objects.forEach((object,index)=>{offsets[
 const url=URL.createObjectURL(new Blob([pdf],{type:"application/pdf"}));const link=document.createElement("a");link.href=url;link.download=`${brochureSafe(brand) || "rbi"}-brochure.pdf`;document.body.appendChild(link);link.click();link.remove();window.setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function BrochureRequestDialog({brand,open,onOpenChange}:{brand:string|null;open:boolean;onOpenChange:(open:boolean)=>void}){const [error,setError]=useState("");if(!brand)return null;const submit=(form:HTMLFormElement)=>{const data=new FormData(form);const name=String(data.get("name")||"").trim();const phone=String(data.get("phone")||"").trim();const email=String(data.get("email")||"").trim();const company=String(data.get("company")||"").trim();if(!name||!phone||!email){setError("Please add your name, phone number and email.");return}setError("");const message=`Brochure download request\nBrand: ${brand}\nName: ${name}\nCompany: ${company || "-"}\nPhone: ${phone}\nEmail: ${email}`;window.location.href=`mailto:${EMAIL}?subject=${encodeURIComponent(`Brochure request: ${brand}`)}&body=${encodeURIComponent(message)}`;window.setTimeout(()=>{downloadBrochurePdf(brand);onOpenChange(false)},700)};return <Dialog open={open} onOpenChange={onOpenChange}><DialogContent className="max-h-[92vh] overflow-y-auto sm:max-w-2xl"><DialogHeader><p className="eyebrow">Brochure access</p><DialogTitle className="text-2xl">Download {brand} brochure</DialogTitle><DialogDescription>Fill in your details first. An email draft will open for RBI, then the brochure PDF will download.</DialogDescription></DialogHeader><form className="space-y-4" onSubmit={(event)=>{event.preventDefault();submit(event.currentTarget)}}><div className="grid gap-4 sm:grid-cols-2"><div><Label htmlFor="br-name">Name *</Label><Input id="br-name" name="name" required maxLength={100} className="mt-1 h-12"/></div><div><Label htmlFor="br-company">Company</Label><Input id="br-company" name="company" maxLength={120} className="mt-1 h-12"/></div><div><Label htmlFor="br-phone">Phone *</Label><Input id="br-phone" name="phone" type="tel" required maxLength={20} className="mt-1 h-12"/></div><div><Label htmlFor="br-email">Email *</Label><Input id="br-email" name="email" type="email" required maxLength={200} className="mt-1 h-12"/></div></div>{error&&<p className="text-sm font-medium text-destructive">{error}</p>}<Button type="submit" size="lg" className="h-12 w-full"><Download/>Submit and download brochure</Button></form></DialogContent></Dialog>}
-export function BrochureGrid({brands}:{brands:string[]}){const [selected,setSelected]=useState<string|null>(null);return <><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{brands.slice(0,8).map(b=><article key={b} className="border border-border bg-background p-5"><Download className="text-primary"/><h3 className="mt-5 font-black">Brochure: {b}</h3><p className="mt-2 text-xs text-muted-foreground">Fill the quick form to receive follow-up and download the PDF.</p><Button type="button" variant="outline" size="sm" className="mt-5" onClick={()=>setSelected(b)}>Download PDF</Button></article>)}</div><BrochureRequestDialog brand={selected} open={!!selected} onOpenChange={open=>!open&&setSelected(null)}/></>}
+export function BrochureGrid({brands}:{brands:string[]}){const [selected,setSelected]=useState<string|null>(null);return <><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{brands.slice(0,8).map(b=><article key={b} className="border border-border bg-background p-5"><Download className="text-primary"/><h3 className="mt-5 font-black">Brochure: {b}</h3><p className="mt-2 text-xs text-muted-foreground">{brochureContent.description}</p><Button type="button" variant="outline" size="sm" className="mt-5" onClick={()=>setSelected(b)}>Download PDF</Button></article>)}</div><BrochureRequestDialog brand={selected} open={!!selected} onOpenChange={open=>!open&&setSelected(null)}/></>}
 export function ProductTypes({pillar,sub,onQuote,onView}:{pillar:Pillar;sub:SubCategory;onQuote?:(name:string)=>void;onView?:(name:string)=>void}){return <div className="grid gap-4 md:grid-cols-2">{sub.types.map((t,i)=><article key={t} className="product-type"><div className="flex items-start justify-between gap-4"><span className="grid size-9 shrink-0 place-items-center bg-category text-sm font-black text-category-foreground">{String(i+1).padStart(2,"0")}</span><CheckCircle2 className="text-category"/></div><h3 className="mt-6 text-xl font-black">{t}</h3><p className="mt-3 leading-7 text-muted-foreground">{describeType(t)}</p>{onView?<Button className="mt-5" onClick={()=>onView(t)}>View range <ArrowRight/></Button>:onQuote&&<Button variant="outline" className="mt-5" onClick={()=>onQuote(t)}><MessageSquareText/>Request quote</Button>}</article>)}</div>}
 export function EnquiryBand({title,category,requirement}:{title:string;category:string;requirement?:string}){return <section id="enquire" className="pattern-shared bg-muted py-16"><div className="site-container grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow">Technical enquiry</p><h2 className="section-title mt-3">{title}</h2><p className="mt-5 leading-7 text-muted-foreground">Share a part number, size, brand, drawing or application. Our team will help identify the right option.</p></div><div className="border border-border bg-background p-5 shadow-sm md:p-8"><EnquiryForm seed={requirement?{category,requirement}:{category}} compact/></div></div></section>}
 export {images};

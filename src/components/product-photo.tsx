@@ -1,4 +1,4 @@
-export function ProductPhoto({ src, alt, loading }: { src: string; alt: string; loading?: "lazy" | "eager" }) {
+export function ProductPhoto({ src, alt, loading, fit = "cover" }: { src: string; alt: string; loading?: "lazy" | "eager"; fit?: "cover" | "contain" }) {
   return (
     <div data-product-photo className="size-full overflow-hidden">
       <img
@@ -7,7 +7,7 @@ export function ProductPhoto({ src, alt, loading }: { src: string; alt: string; 
         loading={loading}
         width={1672}
         height={941}
-        className="size-full object-cover"
+        className={fit === "contain" ? "size-full object-contain" : "size-full object-cover"}
       />
     </div>
   );
