@@ -1,0 +1,50 @@
+import { useEffect, useRef } from "react";
+import { productRangeContent, type ProductVideo } from "@/lib/site-data";
+
+export function ProductVideoGallery({ videos, active }: { videos: readonly ProductVideo[]; active: boolean }) {
+  const playersRef = useRef(new Map<string, HTMLVideoElement>());
+
+  useEffect(() => {
+    const players = [...playersRef.current.values()];
+    if (!active) players.forEach(player => player.pause());
+    return () => players.forEach(player => player.pause());
+  }, [active, videos]);
+
+  if (!videos.length) return null;
+
+  return (
+    <section aria-label={productRangeContent.videosTitle} className="min-w-0">
+      <h3 className="mb-3 text-base font-black">{productRangeContent.videosTitle}</h3>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {videos.map(video => (
+          <figure key={video.src} className="min-w-0 overflow-hidden rounded-md border border-border bg-background">
+            <video
+              ref={(player) => {
+                if (player) playersRef.current.set(video.src, player);
+                else playersRef.current.delete(video.src);
+              }}
+              controls
+              playsInline
+              preload="metadata"
+              poster={video.poster}
+              aria-label={video.title}
+              onPlay={(event) => {
+                playersRef.current.forEach(player => {
+                  if (player !== event.currentTarget) player.pause();
+                });
+              }}
+              className="block h-64 w-full bg-black object-contain sm:h-72"
+            >
+              <source src={video.src} type="video/mp4" />
+              <a href={video.src}>{productRangeContent.videoFallback}</a>
+            </video>
+            <figcaption className="border-t border-border p-3 text-center">
+              <h4 className="text-base font-black leading-6">{video.title}</h4>
+              <p className="mt-1 text-xs text-muted-foreground">{video.duration}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}

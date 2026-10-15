@@ -3,18 +3,19 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight,CheckCircle2,ChevronRight,Download,Factory,Home,MessageSquareText,Pause,Play,Tags } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGallery } from "@/components/product-gallery";
+import { ProductVideoGallery } from "@/components/product-video-gallery";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog,DialogContent,DialogDescription,DialogHeader,DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EMAIL,EnquiryForm,EnquiryDialog } from "@/components/enquiry";
-import { brochureContent,describeType,getBrandLogo,pillarList,productRangeContent,type Pillar,type SubCategory } from "@/lib/site-data";
+import { brochureContent,describeType,getBrandLogo,pillarList,productPhotoShowcases,productRangeContent,productVideoShowcases,type Pillar,type SubCategory } from "@/lib/site-data";
 import powerImg from "@/assets/power-transmission.jpg";import automationImg from "@/assets/automation.jpg";import adhesivesImg from "@/assets/adhesives.jpg";
 import classicalImg from "@/assets/v-belts/classical-clean.jpg";import coggedImg from "@/assets/v-belts/cogged-clean.jpg";import bandedImg from "@/assets/v-belts/banded-clean.jpg";import narrowImg from "@/assets/v-belts/narrow-clean.jpg";
 const images={power:powerImg,automation:automationImg,adhesives:adhesivesImg};
 const vBeltPhotos=[{image:classicalImg,title:"Classical wrapped belts",note:"General-purpose wrapped profiles for dependable plant maintenance."},{image:coggedImg,title:"Raw-edge cogged belts",note:"Flexible profiles for compact drives and improved heat dissipation."},{image:bandedImg,title:"Banded drive systems",note:"Joined belts for vibration control and shock-loaded applications."},{image:narrowImg,title:"Narrow and variable-speed profiles",note:"Compact section options for high-power and adjustable-speed drives."}];
 const formCategory=(key:string)=>key==="power-transmission"?"Power Transmission":key==="automation"?"Automation":"Adhesives";
-const rangePhotos=(pillar:Pillar,sub:SubCategory)=>sub.slug==="v-belts"?vBeltPhotos:[{image:images[pillar.image],title:sub.name,note:sub.short}];
+const rangePhotos=(pillar:Pillar,sub:SubCategory)=>productPhotoShowcases[`${pillar.key}/${sub.slug}`] ?? (sub.slug==="v-belts"?vBeltPhotos:[{image:images[pillar.image],title:sub.name,note:sub.short}]);
 export function Breadcrumbs({items}:{items:{label:string;to:string}[]}){return <section className="border-b border-border bg-background"><div className="site-container py-5"><nav aria-label="Breadcrumb"><ol className="flex flex-wrap items-center gap-2 text-sm font-semibold"><li><Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary"><Home className="size-4"/>Home</Link></li>{items.map((item,index)=>{const current=index===items.length-1;return <li key={item.to} className="flex items-center gap-2"><ChevronRight className="size-4 text-muted-foreground/60"/>{current?<span aria-current="page" className="text-primary">{item.label}</span>:<a href={item.to} className="text-muted-foreground hover:text-primary">{item.label}</a>}</li>})}</ol></nav></div></section>}
 export function PageHero({kicker,title,description,image,accent="brand",compact=false}:{kicker:string;title:string;description:string;image?:string;accent?:string;compact?:boolean}){return <section className={`page-hero pattern-${accent} ${compact?"page-hero-compact h-[260px] md:h-[300px]":"page-hero-full"}`}><div className="absolute inset-0 bg-foreground/75"/>{image&&<img src={image} alt="Industrial machinery and components" width={1408} height={912} className="absolute inset-0 -z-10 size-full object-cover"/>}<div className={`site-container relative flex h-full flex-col justify-center text-background ${compact?"py-6":"py-20 md:py-28"}`}><p className="eyebrow text-primary-soft">{kicker}</p><h1 className={`mt-3 max-w-4xl font-black leading-tight ${compact?"text-2xl sm:text-3xl md:text-4xl":"text-4xl md:text-6xl"}`}>{title}</h1><p className={`max-w-2xl text-background/80 ${compact?"mt-3 text-sm leading-6 md:text-base md:leading-7":"mt-6 text-lg leading-8"}`}>{description}</p></div></section>}
 export function SectionHeading({eyebrow,title,text}:{eyebrow?:string;title:React.ReactNode;text?:string}){return <div className="mb-10 max-w-3xl">{eyebrow&&<p className="eyebrow">{eyebrow}</p>}<h2 className="section-title mt-3">{title}</h2>{text&&<p className="mt-4 text-lg leading-8 text-muted-foreground">{text}</p>}</div>}
@@ -93,6 +94,7 @@ export function CategoryGrid({pillar}:{pillar:Pillar}){const [selected,setSelect
 function ProductRangeDialog({pillar,sub,open,onOpenChange,onEnquire}:{pillar:Pillar;sub:SubCategory|null;open:boolean;onOpenChange:(open:boolean)=>void;onEnquire:(sub:SubCategory)=>void}){
 if(!sub)return null;
 const photos=rangePhotos(pillar,sub);
+const videos=productVideoShowcases[`${pillar.key}/${sub.slug}`] ?? [];
 return (
   <Dialog open={open} onOpenChange={onOpenChange}>
     <DialogContent className={`theme-${pillar.key} flex max-h-[90dvh] w-[calc(100%-1.5rem)] max-w-5xl flex-col gap-0 overflow-hidden p-0 sm:max-w-5xl [&>button]:grid [&>button]:size-10 [&>button]:place-items-center [&>button]:bg-muted`}>
@@ -104,7 +106,7 @@ return (
       <div className="min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-5">
         <div className="grid gap-5 md:grid-cols-[0.9fr_1.1fr]">
           <div className="min-w-0">
-            <ProductGallery key={sub.slug} photos={photos} active={open} compact />
+            <ProductGallery key={sub.slug} photos={photos} active={open} compact autoPlay={pillar.key === "power-transmission" && sub.slug === "conveyor-belts"} />
             <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-foreground/80">
               {productRangeContent.benefits.map(item => (
                 <li key={item} className="inline-flex items-center gap-1.5"><CheckCircle2 className="size-4 shrink-0 text-category" aria-hidden="true" />{item}</li>
@@ -130,6 +132,11 @@ return (
             </section>
           </div>
         </div>
+        {videos.length > 0 && (
+          <div className="mt-5 border-t border-border pt-5">
+            <ProductVideoGallery key={sub.slug} videos={videos} active={open} />
+          </div>
+        )}
         <details className="mt-5 rounded-md border border-border bg-muted/30 p-4">
           <summary className="cursor-pointer text-sm font-bold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-category">{productRangeContent.quoteTitle}</summary>
           <ul className="mt-3 grid gap-3 text-sm leading-6 text-foreground/80 sm:grid-cols-2">

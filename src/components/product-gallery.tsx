@@ -6,7 +6,7 @@ import { ProductPhoto } from "@/components/product-photo";
 
 type ProductGalleryPhoto = { image: string; title: string; note: string };
 
-export function ProductGallery({ photos, active, eyebrow, compact = false }: { photos: ProductGalleryPhoto[]; active: boolean; eyebrow?: string; compact?: boolean }) {
+export function ProductGallery({ photos, active, eyebrow, compact = false, autoPlay }: { photos: readonly ProductGalleryPhoto[]; active: boolean; eyebrow?: string; compact?: boolean; autoPlay?: boolean }) {
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -17,12 +17,12 @@ export function ProductGallery({ photos, active, eyebrow, compact = false }: { p
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => {
       setReducedMotion(motion.matches);
-      setPlaying(!compact && !motion.matches);
+      setPlaying(autoPlay ?? (!compact && !motion.matches));
     };
     update();
     motion.addEventListener("change", update);
     return () => motion.removeEventListener("change", update);
-  }, [active, compact]);
+  }, [active, compact, autoPlay]);
 
   useEffect(() => {
     if (!api) return;

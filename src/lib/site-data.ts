@@ -18,6 +18,8 @@ export const brochureContent = {
   description: "Share your details to request the latest product brochure.",
 };
 export const productRangeContent = {
+  videosTitle: "Product videos",
+  videoFallback: "Download this video to watch it on your device.",
   typesTitle: "Available product types",
   applicationsTitle: "Applications",
   brandsTitle: "Available brands",
@@ -31,6 +33,37 @@ export const productRangeContent = {
   benefits: ["Genuine brands", "Selection support", "PAN India supply"],
   enquiryHint: "Share your requirement for selection and pricing.",
   enquiryLabel: "Enquire now",
+};
+export type ProductVideo = {
+  src: string;
+  poster: string;
+  title: string;
+  duration: string;
+};
+export const productVideoShowcases: Record<string, readonly ProductVideo[]> = {
+  "power-transmission/conveyor-belts": [
+    {
+      src: "/product-videos/conveyor-equipment-demo.mp4",
+      poster: "/product-videos/conveyor-equipment-demo.jpg",
+      title: "Equipment demonstration",
+      duration: "15 sec",
+    },
+    {
+      src: "/product-videos/magnetic-levitation-conveyor.mp4",
+      poster: "/product-videos/magnetic-levitation-conveyor.jpg",
+      title: "Magnetic levitation conveyor",
+      duration: "13 sec",
+    },
+  ],
+};
+export type ProductShowcasePhoto = { image: string; title: string; note: string };
+export const productPhotoShowcases: Record<string, readonly ProductShowcasePhoto[]> = {
+  "power-transmission/conveyor-belts": [
+    { image: "/product-images/conveyor-belts/pu-pvc-conveyor-belt.png", title: "PU / PVC conveyor belt", note: "" },
+    { image: "/product-images/conveyor-belts/plastic-modular-conveyor-belt.png", title: "Plastic modular conveyor belt", note: "" },
+    { image: "/product-images/conveyor-belts/rubber-conveyor-belt.png", title: "Rubber conveyor belt", note: "" },
+    { image: "/product-images/conveyor-belts/cleated-conveyor-belt.png", title: "Cleated conveyor belt", note: "" },
+  ],
 };
 export const upcomingRange = {
   eyebrow: "Coming soon",
