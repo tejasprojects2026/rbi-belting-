@@ -1,0 +1,42 @@
+{
+  "purpose": "Illustrative industrial imagery for homepage division carousels",
+  "generationMode": "Built-in image_gen",
+  "images": [
+    {
+      "name": "automation-linear-motion",
+      "prompt": "Create one photorealistic industrial website photograph, landscape 3:2 composition, suitable for a small homepage division card cropped to 16:10. Realistic equipment and materials, professional commercial photography, evenly exposed, crisp subject with subtle depth of field. Generic illustrative scene, no claim that this is a particular company's facility. No text, no logos, no brand marks, no watermarks, no collage. Keep all important equipment inside the central 80% of the frame. Clean precision engineering workshop, close three-quarter view of polished steel linear guide rails with bearing carriages and a ball screw assembly mounted on a CNC machine bed. Cool blue and neutral steel tones, accurate practical mechanical details.",
+      "destination": "public/division-images/automation-linear-motion.jpg",
+      "mode": "built-in image_gen"
+    },
+    {
+      "name": "automation-robotics",
+      "prompt": "Create one photorealistic industrial website photograph, landscape 3:2 composition, suitable for a small homepage division card cropped to 16:10. Realistic equipment and materials, professional commercial photography, evenly exposed, crisp subject with subtle depth of field. Generic illustrative scene, no claim that this is a particular company's facility. No text, no logos, no brand marks, no watermarks, no collage. Keep all important equipment inside the central 80% of the frame. Modern industrial automated assembly cell with a compact six-axis robotic arm handling a metal component next to a guarded production conveyor. Clean factory interior with subtle blue accents, no people, credible wiring and gripper construction.",
+      "destination": "public/division-images/automation-robotics.jpg",
+      "mode": "built-in image_gen"
+    },
+    {
+      "name": "automation-servo-drives",
+      "prompt": "Create one photorealistic industrial website photograph, landscape 3:2 composition, suitable for a small homepage division card cropped to 16:10. Realistic equipment and materials, professional commercial photography, evenly exposed, crisp subject with subtle depth of field. Generic illustrative scene, no claim that this is a particular company's facility. No text, no logos, no brand marks, no watermarks, no collage. Keep all important equipment inside the central 80% of the frame. Precision motion-control hardware in a clean machine-building workshop: two compact servo motors with encoder housings and a planetary gearbox beside a tidy control drive cabinet. Brushed metal and restrained blue machine accents, close three-quarter product view.",
+      "destination": "public/division-images/automation-servo-drives.jpg",
+      "mode": "built-in image_gen"
+    },
+    {
+      "name": "adhesives-threadlocking",
+      "prompt": "Create one photorealistic industrial website photograph, landscape 3:2 composition, suitable for a small homepage division card cropped to 16:10. Realistic equipment and materials, professional commercial photography, evenly exposed, crisp subject with subtle depth of field. Generic illustrative scene, no claim that this is a particular company's facility. No text, no logos, no brand marks, no watermarks, no collage. Keep all important equipment inside the central 80% of the frame. Close-up commercial photograph of industrial maintenance on a clean workbench: blue threadlocking liquid being neatly applied from an unlabelled red precision bottle onto a metal bolt beside a disassembled steel flange. A nitrile-gloved hand, natural anatomy, no visible face. Warm neutral workshop lighting.",
+      "destination": "public/division-images/adhesives-threadlocking.jpg",
+      "mode": "built-in image_gen"
+    },
+    {
+      "name": "adhesives-epoxy-bonding",
+      "prompt": "Create one photorealistic industrial website photograph, landscape 3:2 composition, suitable for a small homepage division card cropped to 16:10. Realistic equipment and materials, professional commercial photography, evenly exposed, crisp subject with subtle depth of field. Generic illustrative scene, no claim that this is a particular company's facility. No text, no logos, no brand marks, no watermarks, no collage. Keep all important equipment inside the central 80% of the frame. Close-up commercial photograph of industrial structural bonding on a clean workbench: a twin-barrel unlabelled epoxy applicator with mixing nozzle laying a neat small bead between two brushed steel components. Unlabelled cartridges and a metal fixture nearby. Warm neutral workshop light, no people.",
+      "destination": "public/division-images/adhesives-epoxy-bonding.jpg",
+      "mode": "built-in image_gen"
+    },
+    {
+      "name": "adhesives-tapes-sealants",
+      "prompt": "Create one photorealistic industrial website photograph, landscape 3:2 composition, suitable for a small homepage division card cropped to 16:10. Realistic equipment and materials, professional commercial photography, evenly exposed, crisp subject with subtle depth of field. Generic illustrative scene, no claim that this is a particular company's facility. No text, no logos, no brand marks, no watermarks, no collage. Keep all important equipment inside the central 80% of the frame. Industrial tapes and sealants on a clean maintenance workbench: black foam tape rolls, narrow double-sided adhesive tape rolls and a plain unlabelled silicone sealant cartridge with nozzle beside a neatly sealed metal flange. Warm neutral workshop light, clear recognisable materials, no people.",
+      "destination": "public/division-images/adhesives-tapes-sealants.jpg",
+      "mode": "built-in image_gen"
+    }
+  ]
+}

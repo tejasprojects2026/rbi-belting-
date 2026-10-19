@@ -1,4 +1,48 @@
+import powerDivisionPhoto from "@/assets/power-transmission.jpg";
+import automationDivisionPhoto from "@/assets/automation.jpg";
+import adhesivesDivisionPhoto from "@/assets/adhesives.jpg";
+import classicalDivisionPhoto from "@/assets/v-belts/classical-clean.jpg";
+import coggedDivisionPhoto from "@/assets/v-belts/cogged-clean.jpg";
+
 export type PillarKey = "power-transmission" | "automation" | "adhesives";
+export type DivisionCardPhoto = { src: string; alt: string };
+export const divisionCardContent = {
+  divisionLabel: "Division",
+  linkLabel: "Explore range",
+};
+export const divisionCards: Record<PillarKey, { title: string; description: string; photos: readonly DivisionCardPhoto[] }> = {
+  "power-transmission": {
+    title: "Power Transmission",
+    description: "Belts, pulleys and couplings for reliable industrial drives and conveying.",
+    photos: [
+      { src: powerDivisionPhoto, alt: "Industrial drive belts and pulleys on production machinery" },
+      { src: classicalDivisionPhoto, alt: "Classical wrapped V-belts for industrial drives" },
+      { src: coggedDivisionPhoto, alt: "Raw-edge cogged drive belts" },
+      { src: "/product-images/conveyor-belts/rubber-conveyor-belt.png", alt: "Rubber conveyor belting" },
+      { src: "/product-images/conveyor-belts/cleated-conveyor-belt.png", alt: "Cleated conveyor belt profile" },
+    ],
+  },
+  automation: {
+    title: "Automation & Motion",
+    description: "Linear motion, robotics and drives for precise machine control and automation.",
+    photos: [
+      { src: automationDivisionPhoto, alt: "Automated industrial production equipment" },
+      { src: "/division-images/automation-linear-motion.jpg", alt: "Linear guides and ball screw assembly" },
+      { src: "/division-images/automation-robotics.jpg", alt: "Robotic arm at an automated assembly cell" },
+      { src: "/division-images/automation-servo-drives.jpg", alt: "Servo motors and precision motion-control drives" },
+    ],
+  },
+  adhesives: {
+    title: "Adhesives & Chemicals",
+    description: "Adhesives, sealants and maintenance chemicals for dependable bonding and repair.",
+    photos: [
+      { src: adhesivesDivisionPhoto, alt: "Industrial maintenance and repair workbench" },
+      { src: "/division-images/adhesives-threadlocking.jpg", alt: "Threadlocking adhesive applied to a metal fastener" },
+      { src: "/division-images/adhesives-epoxy-bonding.jpg", alt: "Structural epoxy bonding of metal components" },
+      { src: "/division-images/adhesives-tapes-sealants.jpg", alt: "Industrial tapes and sealants for maintenance" },
+    ],
+  },
+};
 export const footerContact = {
   email: "sales@rbcorp.in",
   gst: "27AAHFR3595G1ZU",
@@ -188,7 +232,6 @@ export const dealerRelationships = {
   title: "Authorized dealers and distributors",
   description: "Our dealer authorizations, partner certificates and recognition. Select an image to view it in detail.",
   viewLabel: "View image",
-  originalLabel: "Open original",
   zoomLabel: "Zoom in",
   fitLabel: "Fit to screen",
   previousLabel: "Previous image",

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, ExternalLink, Maximize2, ZoomIn, ZoomOut } from "lucide-react";
+import { ArrowLeft, ArrowRight, Maximize2, ZoomIn, ZoomOut } from "lucide-react";
 import { SectionHeading } from "@/components/page-sections";
 import { Button } from "@/components/ui/button";
 import {
@@ -214,12 +214,6 @@ export function DealerRelationships() {
                 <Button variant="outline" onClick={() => setZoomed((value) => !value)}>
                   {zoomed ? <ZoomOut /> : <ZoomIn />}
                   {zoomed ? dealerRelationships.fitLabel : dealerRelationships.zoomLabel}
-                </Button>
-                <Button variant="outline" asChild>
-                  <a href={active.image} target="_blank" rel="noopener noreferrer">
-                    {dealerRelationships.originalLabel}
-                    <ExternalLink />
-                  </a>
                 </Button>
               </div>
             </div>
