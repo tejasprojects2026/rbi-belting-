@@ -35,7 +35,7 @@ export function EnquiryForm({ seed = {}, compact = false, hideWhatsApp = false, 
       company: String(formData.get("company") || ""),
       phone: String(formData.get("phone") || ""),
       email: String(formData.get("email") || ""),
-      category: String(formData.get("category") || seed.category || "Not sure"),
+      category: String(formData.get("category") || seed.category || "Others"),
       requirement: String(formData.get("requirement") || seed.requirement || ""),
     };
     if (!clean(details.name) || !clean(details.phone) || !clean(details.requirement)) {
@@ -59,8 +59,8 @@ export function EnquiryForm({ seed = {}, compact = false, hideWhatsApp = false, 
       </div>
       <div>
         <Label htmlFor="eq-category">Category</Label>
-        <select id="eq-category" name="category" defaultValue={seed.category || "Not sure"} className="mt-1 h-12 w-full rounded-md border border-input bg-background px-3">
-          <option>Power Transmission</option><option>Automation</option><option>Adhesives</option><option>Franchise</option><option>Not sure</option>
+        <select id="eq-category" name="category" defaultValue={seed.category || "Others"} className="mt-1 h-12 w-full rounded-md border border-input bg-background px-3">
+          <option>Power Transmission</option><option>Automation</option><option>Adhesives</option><option>Franchise</option><option>Others</option>
         </select>
       </div>
       <div><Label htmlFor="eq-requirement">Describe what you need *</Label><Textarea id="eq-requirement" name="requirement" required maxLength={1000} defaultValue={seed.requirement} rows={compact ? 3 : 5} className="mt-1" placeholder="Part number, size, brand, application or quantity" /></div>

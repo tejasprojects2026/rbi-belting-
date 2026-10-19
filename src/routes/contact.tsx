@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Mail, MapPin, Phone, Star } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import {
   Accordion,
@@ -10,7 +10,7 @@ import {
 import { EnquiryForm } from "@/components/enquiry";
 import { PageHero } from "@/components/page-sections";
 import { breadcrumbSchema, pageHead } from "@/lib/seo";
-import { justdialReviews } from "@/lib/site-data";
+import { footerContact } from "@/lib/site-data";
 import hero from "@/assets/factory-hero.jpg";
 
 const local = {
@@ -102,40 +102,22 @@ function Contact() {
               Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate, Pune 411026
             </ContactItem>
             <ContactItem Icon={Phone} title="Call sales">
-              <a href="tel:+918788195839">+91 87881 95839</a>
-              <br />
-              <a href="tel:+919890961752">+91 98909 61752, Director</a>
+              <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
+                <a href="tel:+918788195839" className="whitespace-nowrap">+91 87881 95839</a>
+                <span aria-hidden="true">/</span>
+                <a href="tel:+919890961752" className="whitespace-nowrap">+91 98909 61752, Director</a>
+              </div>
             </ContactItem>
             <ContactItem Icon={Mail} title="Email">
               <a href="mailto:response@rbibelting.in">response@rbibelting.in</a>
+              <br />
+              <a href={`mailto:${footerContact.email}`}>{footerContact.email}</a>
             </ContactItem>
             <ContactItem Icon={Clock} title="Working hours">
               Monday to Saturday
               <br />
               9:30 AM to 6:30 PM IST
             </ContactItem>
-            <a
-              href="https://maps.app.goo.gl/v51wGZH4o8cT1e3D8"
-              target="_blank"
-              rel="noreferrer"
-              className="block bg-foreground p-6 text-background"
-            >
-              <MapPin />
-              <strong className="mt-4 block">Open in Google Maps</strong>
-              <span className="text-sm text-background/60">Bhosari Industrial Estate, Pune</span>
-            </a>
-            <a
-              href={justdialReviews.listingUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-3 border border-border bg-background p-5"
-            >
-              <Star className="fill-primary text-primary" />
-              <span>
-                <strong className="block">Rated 5.0 on JustDial</strong>
-                <small>{justdialReviews.reviewCount} {justdialReviews.reviewCountLabel}</small>
-              </span>
-            </a>
           </aside>
         </div>
       </section>

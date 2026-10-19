@@ -106,7 +106,7 @@ return (
       <div className="min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-5">
         <div className="grid gap-5 md:grid-cols-[0.9fr_1.1fr]">
           <div className="min-w-0">
-            <ProductGallery key={sub.slug} photos={photos} active={open} compact autoPlay={pillar.key === "power-transmission" && sub.slug === "conveyor-belts"} />
+            <ProductGallery key={sub.slug} photos={photos} active={open} compact autoPlay={pillar.key === "power-transmission" && sub.slug === "conveyor-belts"} showThumbnails={!(pillar.key === "power-transmission" && sub.slug === "conveyor-belts")} />
             <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-foreground/80">
               {productRangeContent.benefits.map(item => (
                 <li key={item} className="inline-flex items-center gap-1.5"><CheckCircle2 className="size-4 shrink-0 text-category" aria-hidden="true" />{item}</li>

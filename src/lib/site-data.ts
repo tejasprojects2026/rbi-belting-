@@ -1,5 +1,10 @@
 export type PillarKey = "power-transmission" | "automation" | "adhesives";
-export const footerContact = { email: "sales@rbcorp.in", gst: "27AAHFR3595G1ZU" };
+export const footerContact = {
+  email: "sales@rbcorp.in",
+  gst: "27AAHFR3595G1ZU",
+  address: "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate, Pune 411026",
+  mapUrl: "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
+};
 export const companyHistory = {
   eyebrow: "Milestones",
   title: "From a belting shop to three industrial divisions",
@@ -14,6 +19,26 @@ export const companyHistory = {
     { year: "2023", description: "Completed 20 years with 500+ active clients and 50+ brand relationships." },
   ],
 } as const;
+export const companyLeadership = [
+  {
+    name: "Mr. Vishwanath Baigar",
+    role: "Founder & Director",
+    description: "With over two decades of hands-on experience in power transmission, he helped build RB International from a Bhosari shop into a multi-division supplier.",
+    portrait: null,
+    note: "Founder portrait and biography are placeholders pending approval.",
+  },
+  {
+    name: "Mr. Omprakash D. Rokhade",
+    role: "Co-Founder & Director",
+    description: "His focus on supply chain efficiency, inventory and customer relationships supports dependable stock availability and delivery.",
+    portrait: {
+      src: "/team/omprakash-rokhade.jpeg",
+      width: 1155,
+      height: 1362,
+    },
+    note: "Biography is a placeholder pending approval.",
+  },
+] as const;
 export const brochureContent = {
   description: "Share your details to request the latest product brochure.",
 };
@@ -133,13 +158,157 @@ const brandLogoAliases: Record<string, string> = {
   "Bond Tide": "Bondtite",
 };
 export const logoBrands = Object.keys(brandLogos);
+export type CertificateFrame = {
+  width: number;
+  height: number;
+  sourceCorners: readonly [
+    readonly [number, number],
+    readonly [number, number],
+    readonly [number, number],
+    readonly [number, number],
+  ];
+};
+export type DealerCertificate = {
+  id: string;
+  brand: string;
+  title: string;
+  detail: string;
+  group: "authorizations" | "recognition";
+  image: string;
+  width: number;
+  height: number;
+  frame?: CertificateFrame;
+  previewCropPosition?: string;
+};
 export const dealerRelationships = {
   eyebrow: "Dealer relationships",
   title: "Authorized dealers and distributors",
-  brands: ["Gates", "Fenner", "PIX", "Pidilite"],
-  certificateLabel: "Authorized Dealer Certificate",
-  certificateNote: "Certificate image and start year placeholder.",
+  description: "Our dealer authorizations, partner certificates and recognition. Select an image to view it in detail.",
+  viewLabel: "View image",
+  originalLabel: "Open original",
+  zoomLabel: "Zoom in",
+  fitLabel: "Fit to screen",
+  previousLabel: "Previous image",
+  nextLabel: "Next image",
 };
+export const dealerCertificates: readonly DealerCertificate[] = [
+  {
+    id: "gates-2026",
+    brand: "Gates",
+    title: "Authorized distributor",
+    detail: "January–December 2026 · Industrial power transmission products",
+    group: "authorizations",
+    image: "/certificates/gates-distributor-2026.jpeg",
+    width: 1280,
+    height: 976,
+    frame: {
+      width: 1280,
+      height: 916,
+      sourceCorners: [[60, 40], [1277, 40], [1277, 928], [15, 930]],
+    },
+  },
+  {
+    id: "pix-2026-27",
+    brand: "PIX",
+    title: "Authorised business partner",
+    detail: "FY 2026–27 · Power transmission products",
+    group: "authorizations",
+    image: "/certificates/pix-business-partner-2026-27.jpeg",
+    width: 1280,
+    height: 954,
+    frame: {
+      width: 1280,
+      height: 916,
+      sourceCorners: [[5, 40], [1272, 24], [1272, 943], [5, 944]],
+    },
+  },
+  {
+    id: "pidilite-2027",
+    brand: "Pidilite / WD-40",
+    title: "Authorized channel partner",
+    detail: "Valid to 31 March 2027 · Pune, Chakan & Talegaon",
+    group: "authorizations",
+    image: "/certificates/pidilite-channel-partner-2027.jpeg",
+    width: 992,
+    height: 1280,
+  },
+  {
+    id: "jk-fenner-2025-26",
+    brand: "JK Fenner",
+    title: "Authorised dealer",
+    detail: "April 2025–March 2026 · V-belt range",
+    group: "authorizations",
+    image: "/certificates/jk-fenner-dealer-2025-26.jpeg",
+    width: 988,
+    height: 1280,
+  },
+  {
+    id: "pidilite-ibs-2014-15",
+    brand: "Pidilite IBS",
+    title: "Authorised reseller",
+    detail: "April 2014–March 2015 · Chakan, Pune",
+    group: "authorizations",
+    image: "/certificates/pidilite-ibs-reseller-2014-15.jpeg",
+    width: 719,
+    height: 1280,
+    frame: {
+      width: 1280,
+      height: 916,
+      sourceCorners: [[714.03, 158.09], [668.26, 986.24], [64.68, 1036.5], [62.99, 104.99]],
+    },
+  },
+  {
+    id: "wd40-platinum-2022-23",
+    brand: "WD-40 / Pidilite",
+    title: "Platinum Club certificate",
+    detail: "FY 2022–23 · Platinum program qualification",
+    group: "recognition",
+    image: "/certificates/wd40-platinum-club-2022-23.jpeg",
+    width: 1280,
+    height: 895,
+    frame: {
+      width: 1180,
+      height: 790,
+      sourceCorners: [[97, 98], [1181, 84], [1251, 830], [73, 856]],
+    },
+  },
+  {
+    id: "3m-appreciation",
+    brand: "3M",
+    title: "Certificate of appreciation",
+    detail: "Recognition for driving the safety culture in India",
+    group: "recognition",
+    image: "/certificates/3m-appreciation.jpeg",
+    width: 1280,
+    height: 1067,
+    frame: {
+      width: 1280,
+      height: 916,
+      sourceCorners: [[44, 162], [1273, 135], [1274, 1014], [16, 1017]],
+    },
+  },
+  {
+    id: "indiamart-trust-seal",
+    brand: "IndiaMART",
+    title: "Trust Seal certificate",
+    detail: "January 2026–August 2027 · Certificate ID 68585",
+    group: "recognition",
+    image: "/certificates/indiamart-trust-seal-2027.jpeg",
+    width: 1209,
+    height: 1600,
+  },
+  {
+    id: "wd40-platinum-recognition",
+    brand: "WD-40",
+    title: "Platinum Club recognition",
+    detail: "Award presentation photograph",
+    group: "recognition",
+    image: "/certificates/wd40-platinum-club-recognition.jpeg",
+    width: 600,
+    height: 800,
+    previewCropPosition: "center 45%",
+  },
+];
 export const getBrandLogo = (brand: string) => brandLogos[brandLogoAliases[brand] ?? brand];
 export const justdialReviews = {
   title: "Customer reviews",
@@ -152,8 +321,10 @@ export const justdialReviews = {
   listingUrl: "https://www.justdial.com/Pune/R-B-International-Belting-Nr-Hotel-Sai-Palace-Bhosari-Industrial-Estate/020PXX20-XX20-170107164555-T5D4_BZDET",
   linkLabel: "Read reviews",
   linkAccessibleLabel: "Read reviews on Justdial",
-  reviewCount: 483,
-  reviewCountLabel: "reviews",
+  rating: 5.0,
+  reviewCount: 973,
+  reviewCountLabel: "ratings",
+  ratingsCheckedOn: "2026-10-19",
   loadingText: "Loading Justdial reviews...",
   unavailableText: "Read our customer reviews directly on Justdial.",
 };
@@ -166,6 +337,10 @@ export const reviewPlatforms = [
     listingUrl: justdialReviews.listingUrl,
     linkLabel: justdialReviews.linkLabel,
     linkAccessibleLabel: justdialReviews.linkAccessibleLabel,
+    rating: justdialReviews.rating,
+    reviewCount: justdialReviews.reviewCount,
+    reviewCountLabel: justdialReviews.reviewCountLabel,
+    ratingsCheckedOn: justdialReviews.ratingsCheckedOn,
   },
   {
     id: "google",
@@ -175,6 +350,10 @@ export const reviewPlatforms = [
     listingUrl: "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
     linkLabel: "Read reviews",
     linkAccessibleLabel: "View RB International on Google Maps",
+    rating: 4.9,
+    reviewCount: 1020,
+    reviewCountLabel: "reviews",
+    ratingsCheckedOn: "2026-10-19",
   },
   {
     id: "indiamart",
@@ -184,6 +363,10 @@ export const reviewPlatforms = [
     listingUrl: "https://m.indiamart.com/r-btraders-pune/profile.html",
     linkLabel: "View profile",
     linkAccessibleLabel: "View our business profile on IndiaMART",
+    rating: 4.3,
+    reviewCount: 25,
+    reviewCountLabel: "ratings",
+    ratingsCheckedOn: "2026-10-19",
   },
 ] as const;
 export type SubCategory = { slug: string; name: string; short: string; types: string[]; brands: string[]; applications: string };

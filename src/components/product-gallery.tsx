@@ -6,7 +6,7 @@ import { ProductPhoto } from "@/components/product-photo";
 
 type ProductGalleryPhoto = { image: string; title: string; note: string };
 
-export function ProductGallery({ photos, active, eyebrow, compact = false, autoPlay }: { photos: readonly ProductGalleryPhoto[]; active: boolean; eyebrow?: string; compact?: boolean; autoPlay?: boolean }) {
+export function ProductGallery({ photos, active, eyebrow, compact = false, autoPlay, showThumbnails = true }: { photos: readonly ProductGalleryPhoto[]; active: boolean; eyebrow?: string; compact?: boolean; autoPlay?: boolean; showThumbnails?: boolean }) {
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -87,7 +87,7 @@ export function ProductGallery({ photos, active, eyebrow, compact = false, autoP
         {eyebrow && <p className="eyebrow text-primary-soft">{eyebrow}</p>}
         <h3 className={compact ? "text-center text-base font-black leading-6" : "mt-2 text-xl font-black leading-7 sm:text-2xl sm:leading-8"}>{current.title}</h3>
       </div>
-      {compact && multiple && (
+      {showThumbnails && compact && multiple && (
         <div className="grid grid-cols-4 gap-2 border-t border-border p-3" role="group" aria-label="Choose a product image">
           {photos.map((item, index) => (
             <button
