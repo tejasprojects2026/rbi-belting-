@@ -43,6 +43,9 @@ export const brochureContent = {
   description: "Share your details to request the latest product brochure.",
 };
 export const productRangeContent = {
+  detailsLabel: "Product range details",
+  typesTabLabel: "Product types",
+  brandsTabLabel: "Brands",
   videosTitle: "Product videos",
   videoFallback: "Download this video to watch it on your device.",
   typesTitle: "Available product types",
@@ -110,14 +113,14 @@ export const upcomingRange = {
   interestTitle: "Help shape the range",
   interestDescription: "Share your application, required sizes and expected quantities when you register your interest.",
 };
-type BrandLogo = { src: string; fit?: "contain" | "cover"; position?: string; scale?: number };
+type BrandLogo = { src: string; fit?: "contain" | "cover"; position?: string; scale?: number; background?: string; stripFrame?: { width: number; height: number; viewBox: string } };
 export const brandLogos: Record<string, BrandLogo> = {
   "Gates": { src: "/brand-logos/gates.svg" },
   "Fenner": { src: "/brand-logos/fenner.png" },
-  "PIX": { src: "/brand-logos/pix.png", fit: "cover", position: "center 55%" },
+  "PIX": { src: "/brand-logos/pix.png", fit: "cover", position: "center 55%", stripFrame: { width: 447, height: 447, viewBox: "36 126 375 196" } },
   "Pidilite": { src: "/brand-logos/pidilite.avif" },
   "Optibelt": { src: "/brand-logos/optibelt.jpeg" },
-  "Goodyear": { src: "/brand-logos/goodyear.png" },
+  "Goodyear": { src: "/brand-logos/goodyear.png", background: "#101d44" },
   "Continental ContiTech": { src: "/brand-logos/continental-contitech.png" },
   "Megadyne": { src: "/brand-logos/megadyne.png", fit: "cover" },
   "Carlisle": { src: "/brand-logos/carlisle.jpg" },

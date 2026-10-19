@@ -1,15 +1,27 @@
 import { useEffect, useState } from "react";
-import { Pause, Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { ProductPhoto } from "@/components/product-photo";
 
 type ProductGalleryPhoto = { image: string; title: string; note: string };
 
-export function ProductGallery({ photos, active, eyebrow, compact = false, autoPlay, showThumbnails = true }: { photos: readonly ProductGalleryPhoto[]; active: boolean; eyebrow?: string; compact?: boolean; autoPlay?: boolean; showThumbnails?: boolean }) {
+export function ProductGallery({
+  photos,
+  active,
+  eyebrow,
+  compact = false,
+}: {
+  photos: readonly ProductGalleryPhoto[];
+  active: boolean;
+  eyebrow?: string;
+  compact?: boolean;
+}) {
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
-  const [playing, setPlaying] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -17,12 +29,11 @@ export function ProductGallery({ photos, active, eyebrow, compact = false, autoP
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => {
       setReducedMotion(motion.matches);
-      setPlaying(autoPlay ?? (!compact && !motion.matches));
     };
     update();
     motion.addEventListener("change", update);
     return () => motion.removeEventListener("change", update);
-  }, [active, compact, autoPlay]);
+  }, []);
 
   useEffect(() => {
     if (!api) return;
@@ -30,79 +41,95 @@ export function ProductGallery({ photos, active, eyebrow, compact = false, autoP
     const startDrag = () => setDragging(true);
     const endDrag = () => setDragging(false);
     select();
-    api.on("select", select).on("reInit", select).on("pointerDown", startDrag).on("pointerUp", endDrag);
+    api
+      .on("select", select)
+      .on("reInit", select)
+      .on("pointerDown", startDrag)
+      .on("pointerUp", endDrag);
     return () => {
-      api.off("select", select).off("reInit", select).off("pointerDown", startDrag).off("pointerUp", endDrag);
+      api
+        .off("select", select)
+        .off("reInit", select)
+        .off("pointerDown", startDrag)
+        .off("pointerUp", endDrag);
     };
   }, [api]);
 
   useEffect(() => {
-    if (!api || !active || !playing || dragging || photos.length < 2) return;
+    if (!api || !active || dragging || photos.length < 2) return;
     const timer = window.setInterval(() => {
       if (!document.hidden) api.scrollNext();
     }, 4000);
     return () => window.clearInterval(timer);
-  }, [api, active, playing, dragging, selected, photos.length]);
+  }, [api, active, dragging, selected, photos.length]);
 
   const current = photos[selected] ?? photos[0];
   if (!current) return null;
   const multiple = photos.length > 1;
-  const arrowClass = "top-1/2 size-9 rounded-sm border-0 bg-background/85 text-foreground shadow-sm hover:bg-background";
 
   return (
     <Carousel
       opts={{ loop: multiple, align: "start", duration: reducedMotion ? 0 : 20 }}
       setApi={setApi}
-      className={compact ? "min-w-0 overflow-hidden rounded-md border border-border bg-background text-foreground" : "min-w-0 bg-foreground text-background"}
+      className={
+        compact
+          ? "flex min-w-0 flex-col overflow-hidden rounded-xl border border-border/70 bg-background text-foreground md:absolute md:inset-0"
+          : "min-w-0 bg-foreground text-background"
+      }
       aria-label="Product photos"
     >
-      <div className="relative">
-        <CarouselContent className="ml-0 touch-pan-y" aria-live="off">
+      <div
+        className={
+          compact
+            ? "relative h-[clamp(12rem,34dvh,17rem)] md:h-auto md:min-h-0 md:flex-1 [&>div]:h-full"
+            : "relative"
+        }
+      >
+        <CarouselContent className={`ml-0 touch-pan-y ${compact ? "h-full" : ""}`} aria-live="off">
           {photos.map((item, index) => (
-            <CarouselItem key={item.image} className={compact ? "h-44 bg-muted pl-0 sm:h-52" : "aspect-[16/9] pl-0"} aria-hidden={selected !== index} aria-label={`${index + 1} of ${photos.length}: ${item.title}`}>
-              <ProductPhoto src={item.image} alt={item.title} fit={compact ? "contain" : "cover"} />
+            <CarouselItem
+              key={item.image}
+              className={compact ? "h-full bg-muted/25 pl-0" : "aspect-[16/9] pl-0"}
+              aria-hidden={selected !== index}
+              aria-label={`${index + 1} of ${photos.length}: ${item.title}`}
+            >
+              <ProductPhoto src={item.image} alt={item.title} fit="cover" />
             </CarouselItem>
           ))}
         </CarouselContent>
-        {multiple && (
-          <>
-            <CarouselPrevious className={`${arrowClass} left-3`} aria-label="Previous product image" title="Previous product image" />
-            <CarouselNext className={`${arrowClass} right-3`} aria-label="Next product image" title="Next product image" />
-            <span className="absolute bottom-3 left-3 bg-foreground/75 px-2 py-1 text-xs font-bold tabular-nums text-background">{selected + 1} / {photos.length}</span>
-            <Button
-              type="button"
-              variant="secondary"
-              size="icon"
-              className="absolute bottom-3 right-3 size-9 bg-background/85 text-foreground hover:bg-background"
-              aria-label={playing ? "Pause product slideshow" : "Play product slideshow"}
-              title={playing ? "Pause product slideshow" : "Play product slideshow"}
-              onClick={() => setPlaying(value => !value)}
+      </div>
+      <div
+        className={
+          compact
+            ? "flex shrink-0 flex-col gap-1.5 border-t border-border/70 px-3 py-3"
+            : "flex items-center gap-4 p-5"
+        }
+      >
+        <div className={compact ? "min-w-0" : "min-w-0 flex-1"} aria-live="off" aria-atomic="true">
+          {eyebrow && <p className="eyebrow text-primary-soft">{eyebrow}</p>}
+          <h3
+            className={
+              compact
+                ? "text-sm font-semibold leading-5"
+                : "mt-2 text-xl font-black leading-7 sm:text-2xl sm:leading-8"
+            }
+          >
+            {current.title}
+          </h3>
+          {multiple && !compact && (
+            <p
+              className={`mt-1 text-xs tabular-nums ${compact ? "text-muted-foreground" : "text-background/60"}`}
             >
-              {playing ? <Pause className="size-4" /> : <Play className="size-4" />}
-            </Button>
-          </>
+              {selected + 1} / {photos.length}
+            </p>
+          )}
+        </div>
+        {multiple && compact && (
+          <p className="text-xs tabular-nums text-muted-foreground" aria-live="off">
+            {selected + 1} / {photos.length}
+          </p>
         )}
       </div>
-      <div className={compact ? "p-3" : "p-5"} aria-live={playing ? "off" : "polite"} aria-atomic="true">
-        {eyebrow && <p className="eyebrow text-primary-soft">{eyebrow}</p>}
-        <h3 className={compact ? "text-center text-base font-black leading-6" : "mt-2 text-xl font-black leading-7 sm:text-2xl sm:leading-8"}>{current.title}</h3>
-      </div>
-      {showThumbnails && compact && multiple && (
-        <div className="grid grid-cols-4 gap-2 border-t border-border p-3" role="group" aria-label="Choose a product image">
-          {photos.map((item, index) => (
-            <button
-              key={item.image}
-              type="button"
-              aria-label={`Show ${item.title}`}
-              aria-pressed={selected === index}
-              onClick={() => { setPlaying(false); api?.scrollTo(index); }}
-              className={`overflow-hidden rounded-sm border-2 bg-muted p-0.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-category focus-visible:ring-offset-2 ${selected === index ? "border-category" : "border-transparent hover:border-category/50"}`}
-            >
-              <img src={item.image} alt="" width={96} height={48} loading="lazy" className="h-11 w-full object-contain" />
-            </button>
-          ))}
-        </div>
-      )}
     </Carousel>
   );
 }

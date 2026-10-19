@@ -1,15 +1,14 @@
 import { useEffect,useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight,CheckCircle2,ChevronRight,Download,Factory,Home,MessageSquareText,Pause,Play,Tags } from "lucide-react";
+import { ArrowRight,CheckCircle2,ChevronRight,Download,Home,MessageSquareText,Pause,Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ProductGallery } from "@/components/product-gallery";
-import { ProductVideoGallery } from "@/components/product-video-gallery";
+import { ProductRangeDialog } from "@/components/product-range-dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog,DialogContent,DialogDescription,DialogHeader,DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EMAIL,EnquiryForm,EnquiryDialog } from "@/components/enquiry";
-import { brochureContent,describeType,getBrandLogo,pillarList,productPhotoShowcases,productRangeContent,productVideoShowcases,type Pillar,type SubCategory } from "@/lib/site-data";
+import { brochureContent,describeType,getBrandLogo,pillarList,productPhotoShowcases,type Pillar,type SubCategory } from "@/lib/site-data";
 import powerImg from "@/assets/power-transmission.jpg";import automationImg from "@/assets/automation.jpg";import adhesivesImg from "@/assets/adhesives.jpg";
 import classicalImg from "@/assets/v-belts/classical-clean.jpg";import coggedImg from "@/assets/v-belts/cogged-clean.jpg";import bandedImg from "@/assets/v-belts/banded-clean.jpg";import narrowImg from "@/assets/v-belts/narrow-clean.jpg";
 const images={power:powerImg,automation:automationImg,adhesives:adhesivesImg};
@@ -90,70 +89,7 @@ export function BrandStrip({ brands }: { brands: string[] }) {
     </Carousel>
   );
 }
-export function CategoryGrid({pillar}:{pillar:Pillar}){const [selected,setSelected]=useState<SubCategory|null>(null);const [enquiry,setEnquiry]=useState<SubCategory|null>(null);return <><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{pillar.subcategories.map((s,i)=><article className="category-card" key={s.slug}><span className="text-xs font-black text-category">0{i+1}</span><h3 className="mt-5 text-xl font-black">{s.name}</h3><p className="mt-3 min-h-20 text-sm leading-6 text-muted-foreground">{s.short}</p><div className="mt-6 flex flex-wrap gap-2"><Button type="button" size="sm" onClick={()=>setSelected(s)}>View range <ArrowRight/></Button><Button asChild variant="outline" size="sm"><a href={`/${pillar.key}/${s.slug}#enquire`}>Quick enquiry</a></Button></div></article>)}</div><ProductRangeDialog pillar={pillar} sub={selected} open={!!selected} onOpenChange={open=>!open&&setSelected(null)} onEnquire={sub=>{setSelected(null);setEnquiry(sub)}}/><EnquiryDialog open={!!enquiry} onOpenChange={open=>!open&&setEnquiry(null)} seed={{category:formCategory(pillar.key),requirement:enquiry?`${enquiry.name} requirement: `:""}}/></>}
-function ProductRangeDialog({pillar,sub,open,onOpenChange,onEnquire}:{pillar:Pillar;sub:SubCategory|null;open:boolean;onOpenChange:(open:boolean)=>void;onEnquire:(sub:SubCategory)=>void}){
-if(!sub)return null;
-const photos=rangePhotos(pillar,sub);
-const videos=productVideoShowcases[`${pillar.key}/${sub.slug}`] ?? [];
-return (
-  <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className={`theme-${pillar.key} flex max-h-[90dvh] w-[calc(100%-1.5rem)] max-w-5xl flex-col gap-0 overflow-hidden p-0 sm:max-w-5xl [&>button]:grid [&>button]:size-10 [&>button]:place-items-center [&>button]:bg-muted`}>
-      <DialogHeader className="shrink-0 border-b border-border p-4 pr-16 text-left sm:p-5 sm:pr-16">
-        <p className="eyebrow">{pillar.name}</p>
-        <DialogTitle className="text-2xl font-black leading-tight sm:text-3xl">{sub.name}</DialogTitle>
-        <DialogDescription className="text-sm leading-6 text-foreground/75">{sub.short}</DialogDescription>
-      </DialogHeader>
-      <div className="min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-5">
-        <div className="grid gap-5 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="min-w-0">
-            <ProductGallery key={sub.slug} photos={photos} active={open} compact autoPlay={pillar.key === "power-transmission" && sub.slug === "conveyor-belts"} showThumbnails={!(pillar.key === "power-transmission" && sub.slug === "conveyor-belts")} />
-            <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-foreground/80">
-              {productRangeContent.benefits.map(item => (
-                <li key={item} className="inline-flex items-center gap-1.5"><CheckCircle2 className="size-4 shrink-0 text-category" aria-hidden="true" />{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="min-w-0 space-y-5">
-            <section aria-labelledby="range-product-types">
-              <h3 id="range-product-types" className="text-base font-black">{productRangeContent.typesTitle}</h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {sub.types.map(type => <li key={type} className="rounded-sm border border-category/20 bg-category/5 px-3 py-1.5 text-sm font-semibold leading-5 text-category">{type}</li>)}
-              </ul>
-            </section>
-            <section className="rounded-md border border-border bg-muted/50 p-4" aria-labelledby="range-applications">
-              <h3 id="range-applications" className="flex items-center gap-2 text-base font-black"><Factory className="size-4 text-category" aria-hidden="true" />{productRangeContent.applicationsTitle}</h3>
-              <p className="mt-2 text-sm leading-6 text-foreground/80">{sub.applications}</p>
-            </section>
-            <section aria-labelledby="range-brands">
-              <h3 id="range-brands" className="flex items-center gap-2 text-base font-black"><Tags className="size-4 text-category" aria-hidden="true" />{productRangeContent.brandsTitle}</h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {sub.brands.map(brand => <li key={brand} className="rounded-sm border border-border bg-background px-2.5 py-1 text-sm font-semibold leading-5">{brand}</li>)}
-              </ul>
-            </section>
-          </div>
-        </div>
-        {videos.length > 0 && (
-          <div className="mt-5 border-t border-border pt-5">
-            <ProductVideoGallery key={sub.slug} videos={videos} active={open} />
-          </div>
-        )}
-        <details className="mt-5 rounded-md border border-border bg-muted/30 p-4">
-          <summary className="cursor-pointer text-sm font-bold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-category">{productRangeContent.quoteTitle}</summary>
-          <ul className="mt-3 grid gap-3 text-sm leading-6 text-foreground/80 sm:grid-cols-2">
-            {productRangeContent.quoteDetails.map(item => (
-              <li key={item} className="flex items-start gap-2"><CheckCircle2 className="mt-1 size-4 shrink-0 text-category" aria-hidden="true" /><span>{item}</span></li>
-            ))}
-          </ul>
-        </details>
-      </div>
-      <div className="flex shrink-0 flex-col gap-3 border-t border-border bg-background p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-        <p className="hidden text-sm leading-5 text-foreground/75 sm:block">{productRangeContent.enquiryHint}</p>
-        <Button type="button" size="lg" className="h-11 w-full shrink-0 sm:w-auto" onClick={() => onEnquire(sub)}><MessageSquareText />{productRangeContent.enquiryLabel}</Button>
-      </div>
-    </DialogContent>
-  </Dialog>
-);
-}
+export function CategoryGrid({pillar}:{pillar:Pillar}){const [selected,setSelected]=useState<SubCategory|null>(null);const [enquiry,setEnquiry]=useState<SubCategory|null>(null);return <><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{pillar.subcategories.map((s,i)=><article className="category-card" key={s.slug}><span className="text-xs font-black text-category">0{i+1}</span><h3 className="mt-5 text-xl font-black">{s.name}</h3><p className="mt-3 min-h-20 text-sm leading-6 text-muted-foreground">{s.short}</p><div className="mt-6 flex flex-wrap gap-2"><Button type="button" size="sm" onClick={()=>setSelected(s)}>View range <ArrowRight/></Button><Button asChild variant="outline" size="sm"><a href={`/${pillar.key}/${s.slug}#enquire`}>Quick enquiry</a></Button></div></article>)}</div><ProductRangeDialog key={selected?.slug ?? "range"} pillar={pillar} sub={selected} photos={selected?rangePhotos(pillar,selected):[]} open={!!selected} onOpenChange={open=>!open&&setSelected(null)} onEnquire={sub=>{setSelected(null);setEnquiry(sub)}}/><EnquiryDialog open={!!enquiry} onOpenChange={open=>!open&&setEnquiry(null)} seed={{category:formCategory(pillar.key),requirement:enquiry?`${enquiry.name} requirement: `:""}}/></>}
 const brochureSafe=(value:string)=>value.replace(/[^\w-]+/g,"-").replace(/^-+|-+$/g,"").toLowerCase();
 const pdfText=(value:string)=>value.replace(/[\\()]/g,"\\$&").replace(/[^\x20-\x7e]/g,"");
 function downloadBrochurePdf(brand:string){

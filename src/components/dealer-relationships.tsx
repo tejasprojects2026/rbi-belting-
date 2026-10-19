@@ -149,10 +149,11 @@ export function DealerRelationships() {
                 <Maximize2 className="size-4" />
               </span>
             </button>
-            <div className="flex flex-1 flex-col p-5">
-              <p className="text-sm font-bold text-primary-soft">{certificate.brand}</p>
-              <h3 className="mt-1 text-lg font-black leading-6">{certificate.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-background/70">{certificate.detail}</p>
+            <div className="flex flex-1 flex-col px-5 py-4">
+              <h3 className="text-xl font-black leading-7 text-background">{certificate.brand}</h3>
+              <p className="mt-1 text-sm font-bold leading-5 text-primary-soft">
+                {certificate.title}
+              </p>
             </div>
           </article>
         ))}

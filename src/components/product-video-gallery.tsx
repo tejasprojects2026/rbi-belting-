@@ -1,23 +1,36 @@
 import { useEffect, useRef } from "react";
 import { productRangeContent, type ProductVideo } from "@/lib/site-data";
 
-export function ProductVideoGallery({ videos, active }: { videos: readonly ProductVideo[]; active: boolean }) {
+export function ProductVideoGallery({
+  videos,
+  active,
+  showHeading = true,
+}: {
+  videos: readonly ProductVideo[];
+  active: boolean;
+  showHeading?: boolean;
+}) {
   const playersRef = useRef(new Map<string, HTMLVideoElement>());
 
   useEffect(() => {
     const players = [...playersRef.current.values()];
-    if (!active) players.forEach(player => player.pause());
-    return () => players.forEach(player => player.pause());
+    if (!active) players.forEach((player) => player.pause());
+    return () => players.forEach((player) => player.pause());
   }, [active, videos]);
 
   if (!videos.length) return null;
 
   return (
     <section aria-label={productRangeContent.videosTitle} className="min-w-0">
-      <h3 className="mb-3 text-base font-black">{productRangeContent.videosTitle}</h3>
+      {showHeading && (
+        <h3 className="mb-3 text-base font-black">{productRangeContent.videosTitle}</h3>
+      )}
       <div className="grid gap-4 sm:grid-cols-2">
-        {videos.map(video => (
-          <figure key={video.src} className="min-w-0 overflow-hidden rounded-md border border-border bg-background">
+        {videos.map((video) => (
+          <figure
+            key={video.src}
+            className="min-w-0 overflow-hidden rounded-md border border-border bg-background"
+          >
             <video
               ref={(player) => {
                 if (player) playersRef.current.set(video.src, player);
@@ -29,7 +42,7 @@ export function ProductVideoGallery({ videos, active }: { videos: readonly Produ
               poster={video.poster}
               aria-label={video.title}
               onPlay={(event) => {
-                playersRef.current.forEach(player => {
+                playersRef.current.forEach((player) => {
                   if (player !== event.currentTarget) player.pause();
                 });
               }}
