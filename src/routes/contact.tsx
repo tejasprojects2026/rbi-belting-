@@ -10,7 +10,7 @@ import {
 import { EnquiryForm } from "@/components/enquiry";
 import { PageHero } from "@/components/page-sections";
 import { breadcrumbSchema, pageHead } from "@/lib/seo";
-import { footerContact } from "@/lib/site-data";
+import { footerContact, formContent } from "@/lib/site-data";
 import hero from "@/assets/factory-hero.jpg";
 
 const local = {
@@ -92,9 +92,9 @@ function Contact() {
       <section className="pattern-shared py-20">
         <div className="site-container grid items-start gap-10 lg:grid-cols-[1.2fr_.8fr]">
           <div className="self-start border border-border bg-background p-6 md:p-8">
-            <h2 className="text-3xl font-black">Product enquiry</h2>
+            <h2 className="text-3xl font-black">{formContent.generalTitle}</h2>
             <div className="mt-7">
-              <EnquiryForm />
+              <EnquiryForm variant="general" />
             </div>
           </div>
           <aside className="space-y-4">

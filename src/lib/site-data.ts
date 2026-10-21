@@ -83,6 +83,12 @@ export const companyLeadership = [
     note: "Biography is a placeholder pending approval.",
   },
 ] as const;
+export const formContent = {
+  contactDisclaimer: "By submitting, you agree to be contacted by RB International regarding your enquiry.",
+  generalTitle: "General enquiry",
+  careersCategory: "Careers / Join our team",
+  requirementPlaceholder: "Part number, size, brand, application or quantity",
+};
 export const brochureContent = {
   description: "Share your details to request the latest product brochure.",
 };
@@ -95,15 +101,8 @@ export const productRangeContent = {
   typesTitle: "Available product types",
   applicationsTitle: "Applications",
   brandsTitle: "Available brands",
-  quoteTitle: "For faster quotation",
-  quoteDetails: [
-    "Existing size, marking or part number",
-    "Preferred brand or equivalent options",
-    "Quantity, application and machine type",
-    "Delivery location and urgency",
-  ],
   benefits: ["Genuine brands", "Selection support", "PAN India supply"],
-  enquiryHint: "Share your requirement for selection and pricing.",
+  enquiryHint: "For a quote: size/code, brand, quantity & city.",
   enquiryLabel: "Enquire now",
 };
 export type ProductVideo = {

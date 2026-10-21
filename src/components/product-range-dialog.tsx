@@ -140,22 +140,6 @@ export function ProductRangeDialog({
                   <p className="mt-3 text-[15px] leading-7 text-foreground/85">
                     {sub.applications}
                   </p>
-                  <section className="mt-4 border-t border-border/70 pt-4">
-                    <h4 className="mb-3 text-sm font-semibold text-foreground">
-                      {productRangeContent.quoteTitle}
-                    </h4>
-                    <ul className="space-y-2 pb-1 text-sm leading-6 text-muted-foreground">
-                      {productRangeContent.quoteDetails.map((item) => (
-                        <li key={item} className="flex items-start gap-2">
-                          <Check
-                            className="mt-1 size-3.5 shrink-0 text-category/70"
-                            aria-hidden="true"
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
                 </TabsContent>
 
                 <TabsContent
@@ -205,8 +189,8 @@ export function ProductRangeDialog({
           )}
         </div>
 
-        <div className="flex shrink-0 items-center justify-between gap-5 border-t border-border/70 bg-background px-5 py-3 sm:px-6">
-          <p className="hidden max-w-md text-sm leading-5 text-muted-foreground sm:block">
+        <div className="flex shrink-0 flex-col gap-2 border-t border-border/70 bg-background px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5 sm:px-6">
+          <p className="min-w-0 max-w-md text-xs leading-5 text-muted-foreground sm:text-sm">
             {productRangeContent.enquiryHint}
           </p>
           <Button
