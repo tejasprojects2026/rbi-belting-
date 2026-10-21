@@ -81,7 +81,7 @@ export function ProductGallery({
       <div
         className={
           compact
-            ? "relative h-[clamp(12rem,34dvh,17rem)] md:h-auto md:min-h-0 md:flex-1 [&>div]:h-full"
+            ? "relative aspect-video md:aspect-auto md:min-h-0 md:flex-1 [&>div]:absolute [&>div]:inset-0"
             : "relative"
         }
       >
@@ -89,11 +89,13 @@ export function ProductGallery({
           {photos.map((item, index) => (
             <CarouselItem
               key={item.image}
-              className={compact ? "h-full bg-muted/25 pl-0" : "aspect-[16/9] pl-0"}
+              className={compact ? "relative h-full bg-muted/25 pl-0" : "relative aspect-[16/9] pl-0"}
               aria-hidden={selected !== index}
               aria-label={`${index + 1} of ${photos.length}: ${item.title}`}
             >
-              <ProductPhoto src={item.image} alt={item.title} fit="cover" />
+              <div className="absolute inset-0">
+                <ProductPhoto src={item.image} alt={item.title} fit="contain" />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>

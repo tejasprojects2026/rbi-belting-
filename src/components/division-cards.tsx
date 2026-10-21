@@ -89,12 +89,12 @@ function DivisionPhotos({ name, photos }: { name: string; photos: readonly Divis
                 loading={index <= 1 ? "eager" : "lazy"}
                 decoding="async"
                 draggable={false}
-                className="size-full object-cover"
+                className={photo.fit === "contain" ? "size-full object-contain" : "size-full object-cover"}
               />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="absolute inset-x-0 bottom-0 grid grid-cols-[1fr_auto_1fr] items-center gap-1 bg-gradient-to-t from-black/75 to-black/0 px-3 pb-2 pt-5">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 bg-foreground px-3 py-2">
           <span
             className="min-w-7 text-[11px] font-semibold tabular-nums text-white"
             aria-hidden="true"

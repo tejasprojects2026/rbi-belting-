@@ -44,10 +44,10 @@ export function IndustryShowcase() {
               })}
             </div>
           </div>
-          <figure id="industry-preview" aria-labelledby="industry-preview-title" className="relative min-h-[380px] min-w-0 overflow-hidden bg-foreground text-background sm:min-h-[420px] lg:min-h-0">
-            <img src={photo.src} alt={photo.alt} width={1408} height={912} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent" />
-            <figcaption aria-live="polite" aria-atomic="true" className="relative flex h-full min-h-[380px] flex-col justify-end p-6 sm:min-h-[420px] sm:p-8 lg:min-h-0">
+          <figure id="industry-preview" aria-labelledby="industry-preview-title" className="relative min-w-0 overflow-hidden bg-foreground text-background">
+            <img src={photo.src} alt={photo.alt} width={1408} height={912} loading="lazy" decoding="async" className="h-auto w-full lg:absolute lg:inset-0 lg:size-full lg:object-cover" />
+            <div className="absolute inset-0 hidden bg-gradient-to-t from-black/90 via-black/15 to-transparent lg:block" />
+            <figcaption aria-live="polite" aria-atomic="true" className="relative flex flex-col justify-end p-6 sm:p-8 lg:h-full">
               <span className="mb-4 h-1 w-12 bg-primary-soft" aria-hidden="true" />
               <h3 id="industry-preview-title" className="text-2xl font-black leading-tight sm:text-3xl">{activeIndustry.name}</h3>
               <p className="mt-3 max-w-md text-sm leading-6 text-background/85 sm:text-base sm:leading-7">{activeIndustry.description}</p>

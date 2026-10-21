@@ -19,5 +19,7 @@
 .brand-logo-frame img{display:block;width:100%;max-width:180px;height:88px}
 .brand-tile-label{display:flex;align-items:center;justify-content:center;width:100%;height:32px;flex-shrink:0;font-size:12px;font-weight:700;line-height:16px}
 @keyframes brand-scroll{to{transform:translateX(-50%)}}@keyframes intro-logo{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}@keyframes type-in{from{clip-path:inset(0 50%)}to{clip-path:inset(0 0)}}
+.home-hero{isolation:isolate;background:var(--foreground)}
+@media(max-width:767px){.home-hero>img{position:relative;inset:auto;height:auto;z-index:auto}}
 @media(max-width:640px){.quick-enquiry{max-width:160px;line-height:1.1}.section-title{font-size:2rem}.brand-chip{min-width:145px}.home-hero h1{font-size:2.6rem}.page-hero-full h1{font-size:2.45rem}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.brand-track,.preloader img,.preloader strong{animation:none}.pillar-card,.category-card,.product-type{transition:none}}

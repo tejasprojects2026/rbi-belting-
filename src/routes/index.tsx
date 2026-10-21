@@ -72,8 +72,8 @@ function Home() {
           height={912}
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-foreground/75" />
-        <div className="site-container relative flex min-h-[82vh] items-end pb-8 pt-24 text-background md:pb-10">
+        <div className="absolute inset-0 hidden bg-foreground/75 md:block" />
+        <div className="site-container relative flex items-end py-8 text-background md:min-h-[82vh] md:pb-10 md:pt-24">
           <div className="w-full max-w-6xl">
             <div className="max-w-5xl">
               <p className="eyebrow text-primary-soft">Powering industry since 2003</p>
@@ -101,11 +101,11 @@ function Home() {
               </div>
             </div>
 
-            <div className="mt-10 grid overflow-hidden border border-background/25 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid grid-cols-2 overflow-hidden border border-background/25 lg:grid-cols-4">
               {stats.map(([number, label]) => (
                 <div
                   key={label}
-                  className="border-b border-r border-background/25 px-3 py-5 text-center last:border-r-0 sm:[&:nth-child(even)]:border-r-0 lg:border-b-0 lg:[&:nth-child(even)]:border-r lg:last:border-r-0"
+                  className="border-b border-r border-background/25 px-3 py-5 text-center last:border-r-0 [&:nth-child(even)]:border-r-0 lg:border-b-0 lg:[&:nth-child(even)]:border-r lg:last:border-r-0"
                 >
                   <strong className="block text-2xl font-black text-primary-soft md:text-3xl">{number}</strong>
                   <span className="mt-1 block text-xs font-bold uppercase text-background/75">{label}</span>

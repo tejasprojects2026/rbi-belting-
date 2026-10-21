@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { ArrowLeft, ArrowRight, Maximize2, ZoomIn, ZoomOut } from "lucide-react";
 import { SectionHeading } from "@/components/page-sections";
 import { Button } from "@/components/ui/button";
@@ -56,15 +56,8 @@ function frameTransform({ width, height, sourceCorners }: CertificateFrame) {
   ].join(",")})`;
 }
 
-function CertificateImage({
-  certificate,
-  preview = false,
-}: {
-  certificate: DealerCertificate;
-  preview?: boolean;
-}) {
+function CertificateImage({ certificate }: { certificate: DealerCertificate }) {
   const alt = `${certificate.brand}: ${certificate.title}`;
-  const cropPosition = preview ? certificate.previewCropPosition : undefined;
 
   if (certificate.frame) {
     const { width, height } = certificate.frame;
@@ -102,8 +95,7 @@ function CertificateImage({
       height={certificate.height}
       loading="lazy"
       decoding="async"
-      className={cropPosition ? "size-full object-cover" : "size-full object-contain"}
-      style={cropPosition ? { objectPosition: cropPosition } : undefined}
+      className="size-full object-contain"
     />
   );
 }
@@ -111,11 +103,17 @@ function CertificateImage({
 export function DealerRelationships() {
   const [selected, setSelected] = useState<number | null>(null);
   const [zoomed, setZoomed] = useState(false);
+  const viewerRef = useRef<HTMLDivElement>(null);
   const active = selected === null ? undefined : dealerCertificates[selected];
+  const documentWidth = active ? (active.frame?.width ?? active.width) : 0;
+  const documentHeight = active ? (active.frame?.height ?? active.height) : 0;
+
+  const resetScroll = () => viewerRef.current?.scrollTo({ left: 0, top: 0 });
 
   const select = (index: number) => {
     setSelected((index + dealerCertificates.length) % dealerCertificates.length);
     setZoomed(false);
+    resetScroll();
   };
 
   return (
@@ -135,18 +133,25 @@ export function DealerRelationships() {
           >
             <button
               type="button"
-              className="group relative block aspect-[4/3] w-full shrink-0 cursor-zoom-in bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-soft"
+              className="group block w-full shrink-0 cursor-zoom-in bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-soft"
               aria-label={`${dealerRelationships.viewLabel}: ${certificate.brand}, ${certificate.title}`}
               onClick={() => select(index)}
             >
-              <span className="absolute inset-3 block">
-                <CertificateImage certificate={certificate} preview />
-              </span>
               <span
-                aria-hidden="true"
-                className="absolute bottom-3 right-3 rounded-full bg-foreground/80 p-2 text-background transition-colors group-hover:bg-primary"
+                className="relative block aspect-(--certificate-aspect) sm:aspect-[4/3]"
+                style={
+                  {
+                    "--certificate-aspect": `${certificate.frame?.width ?? certificate.width} / ${certificate.frame?.height ?? certificate.height}`,
+                  } as CSSProperties
+                }
               >
-                <Maximize2 className="size-4" />
+                <span className="absolute inset-1 block sm:inset-3">
+                  <CertificateImage certificate={certificate} />
+                </span>
+              </span>
+              <span className="flex min-h-11 items-center justify-center gap-2 border-t border-border px-3 py-2 text-sm font-semibold text-primary transition-colors group-hover:bg-muted">
+                <Maximize2 className="size-4" aria-hidden="true" />
+                {dealerRelationships.enlargeLabel}
               </span>
             </button>
             <div className="flex flex-1 flex-col px-5 py-4">
@@ -169,52 +174,79 @@ export function DealerRelationships() {
         }}
       >
         {active && (
-          <DialogContent className="flex max-h-[94dvh] w-[calc(100%-1.5rem)] max-w-6xl flex-col gap-0 overflow-hidden p-0">
+          <DialogContent className="flex h-dvh max-h-dvh w-full max-w-none flex-col gap-0 overflow-hidden border-0 p-0 sm:h-[94dvh] sm:max-h-[94dvh] sm:w-[calc(100%-1.5rem)] sm:max-w-6xl sm:border [&>button]:grid [&>button]:size-11 [&>button]:place-items-center [&>button]:bg-background [&>button]:opacity-100">
             <DialogHeader className="shrink-0 border-b border-border p-4 pr-12 text-left sm:p-5 sm:pr-12">
               <DialogTitle className="text-xl leading-7">
                 {active.brand} — {active.title}
               </DialogTitle>
               <DialogDescription>{active.detail}</DialogDescription>
             </DialogHeader>
-            <div className="min-h-0 overflow-auto bg-stone-100 p-3 sm:p-5">
+            <div
+              ref={viewerRef}
+              role="region"
+              aria-label={dealerRelationships.viewerLabel}
+              tabIndex={0}
+              className="min-h-0 flex-1 touch-pan-x touch-pan-y touch-pinch-zoom overflow-auto overscroll-contain bg-stone-100 p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary sm:p-5"
+            >
               <div
                 key={`${active.id}-${zoomed}`}
-                className={
+                className={zoomed ? "shrink-0 bg-white" : "h-full w-full bg-white"}
+                style={
                   zoomed
-                    ? "h-[120dvh] min-w-[1200px] bg-white"
-                    : "h-[56dvh] w-full bg-white sm:h-[64dvh]"
+                    ? {
+                        width: Math.max(1200, documentWidth),
+                        aspectRatio: `${documentWidth} / ${documentHeight}`,
+                      }
+                    : undefined
                 }
               >
                 <CertificateImage certificate={active} />
               </div>
             </div>
-            <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-border bg-background p-3 sm:px-5">
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  aria-label={dealerRelationships.previousLabel}
-                  onClick={() => select((selected ?? 0) - 1)}
-                >
-                  <ArrowLeft />
-                </Button>
-                <span className="min-w-12 text-center text-sm tabular-nums" aria-live="polite">
-                  {(selected ?? 0) + 1} / {dealerCertificates.length}
-                </span>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  aria-label={dealerRelationships.nextLabel}
-                  onClick={() => select((selected ?? 0) + 1)}
-                >
-                  <ArrowRight />
-                </Button>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <Button variant="outline" onClick={() => setZoomed((value) => !value)}>
-                  {zoomed ? <ZoomOut /> : <ZoomIn />}
-                  {zoomed ? dealerRelationships.fitLabel : dealerRelationships.zoomLabel}
-                </Button>
+            <div className="shrink-0 border-t border-border bg-background px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-5">
+              <p
+                className="mb-2 text-center text-xs leading-5 text-muted-foreground"
+                aria-live="polite"
+              >
+                {zoomed ? dealerRelationships.zoomHint : dealerRelationships.fitHint}
+              </p>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="size-11"
+                    aria-label={dealerRelationships.previousLabel}
+                    onClick={() => select((selected ?? 0) - 1)}
+                  >
+                    <ArrowLeft />
+                  </Button>
+                  <span className="min-w-12 text-center text-sm tabular-nums" aria-live="polite">
+                    {(selected ?? 0) + 1} / {dealerCertificates.length}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="size-11"
+                    aria-label={dealerRelationships.nextLabel}
+                    onClick={() => select((selected ?? 0) + 1)}
+                  >
+                    <ArrowRight />
+                  </Button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    variant="outline"
+                    className="h-11"
+                    onClick={() => {
+                      setZoomed((value) => !value);
+                      resetScroll();
+                    }}
+                  >
+                    {zoomed ? <ZoomOut /> : <ZoomIn />}
+                    {zoomed ? dealerRelationships.fitLabel : dealerRelationships.zoomLabel}
+                  </Button>
+                </div>
               </div>
             </div>
           </DialogContent>

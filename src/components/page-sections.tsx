@@ -16,7 +16,27 @@ const vBeltPhotos=[{image:classicalImg,title:"Classical wrapped belts",note:"Gen
 const formCategory=(key:string)=>key==="power-transmission"?"Power Transmission":key==="automation"?"Automation":"Adhesives";
 const rangePhotos=(pillar:Pillar,sub:SubCategory)=>productPhotoShowcases[`${pillar.key}/${sub.slug}`] ?? (sub.slug==="v-belts"?vBeltPhotos:[{image:images[pillar.image],title:sub.name,note:sub.short}]);
 export function Breadcrumbs({items}:{items:{label:string;to:string}[]}){return <section className="border-b border-border bg-background"><div className="site-container py-5"><nav aria-label="Breadcrumb"><ol className="flex flex-wrap items-center gap-2 text-sm font-semibold"><li><Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary"><Home className="size-4"/>Home</Link></li>{items.map((item,index)=>{const current=index===items.length-1;return <li key={item.to} className="flex items-center gap-2"><ChevronRight className="size-4 text-muted-foreground/60"/>{current?<span aria-current="page" className="text-primary">{item.label}</span>:<a href={item.to} className="text-muted-foreground hover:text-primary">{item.label}</a>}</li>})}</ol></nav></div></section>}
-export function PageHero({kicker,title,description,image,accent="brand",compact=false}:{kicker:string;title:string;description:string;image?:string;accent?:string;compact?:boolean}){return <section className={`page-hero pattern-${accent} ${compact?"page-hero-compact h-[260px] md:h-[300px]":"page-hero-full"}`}><div className="absolute inset-0 bg-foreground/75"/>{image&&<img src={image} alt="Industrial machinery and components" width={1408} height={912} className="absolute inset-0 -z-10 size-full object-cover"/>}<div className={`site-container relative flex h-full flex-col justify-center text-background ${compact?"py-6":"py-20 md:py-28"}`}><p className="eyebrow text-primary-soft">{kicker}</p><h1 className={`mt-3 max-w-4xl font-black leading-tight ${compact?"text-2xl sm:text-3xl md:text-4xl":"text-4xl md:text-6xl"}`}>{title}</h1><p className={`max-w-2xl text-background/80 ${compact?"mt-3 text-sm leading-6 md:text-base md:leading-7":"mt-6 text-lg leading-8"}`}>{description}</p></div></section>}
+export function PageHero({kicker,title,description,image,accent="brand",compact=false}:{kicker:string;title:string;description:string;image?:string;accent?:string;compact?:boolean}){
+  return (
+    <section className={`page-hero bg-foreground pattern-${accent} ${compact ? "page-hero-compact md:h-[300px]" : "page-hero-full"}`}>
+      <div className="absolute inset-0 hidden bg-foreground/75 md:block" />
+      {image && (
+        <img
+          src={image}
+          alt="Industrial machinery and components"
+          width={1408}
+          height={912}
+          className="h-auto w-full md:absolute md:inset-0 md:-z-10 md:size-full md:object-cover"
+        />
+      )}
+      <div className={`site-container relative flex flex-col justify-center text-background md:h-full ${compact ? "py-6" : "py-8 md:py-28"}`}>
+        <p className="eyebrow text-primary-soft">{kicker}</p>
+        <h1 className={`mt-3 max-w-4xl font-black leading-tight ${compact ? "text-2xl sm:text-3xl md:text-4xl" : "text-4xl md:text-6xl"}`}>{title}</h1>
+        <p className={`max-w-2xl text-background/80 ${compact ? "mt-3 text-sm leading-6 md:text-base md:leading-7" : "mt-6 text-lg leading-8"}`}>{description}</p>
+      </div>
+    </section>
+  );
+}
 export function SectionHeading({eyebrow,title,text}:{eyebrow?:string;title:React.ReactNode;text?:string}){return <div className="mb-10 max-w-3xl">{eyebrow&&<p className="eyebrow">{eyebrow}</p>}<h2 className="section-title mt-3">{title}</h2>{text&&<p className="mt-4 text-lg leading-8 text-muted-foreground">{text}</p>}</div>}
 export { PillarCards } from "@/components/division-cards";
 export function BrandStrip({ brands }: { brands: string[] }) {

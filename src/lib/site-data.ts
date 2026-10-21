@@ -5,7 +5,7 @@ import classicalDivisionPhoto from "@/assets/v-belts/classical-clean.jpg";
 import coggedDivisionPhoto from "@/assets/v-belts/cogged-clean.jpg";
 
 export type PillarKey = "power-transmission" | "automation" | "adhesives";
-export type DivisionCardPhoto = { src: string; alt: string };
+export type DivisionCardPhoto = { src: string; alt: string; fit?: "cover" | "contain" };
 export const divisionCardContent = {
   divisionLabel: "Division",
   linkLabel: "Explore range",
@@ -16,10 +16,10 @@ export const divisionCards: Record<PillarKey, { title: string; description: stri
     description: "Belts, pulleys and couplings for reliable industrial drives and conveying.",
     photos: [
       { src: powerDivisionPhoto, alt: "Industrial drive belts and pulleys on production machinery" },
-      { src: classicalDivisionPhoto, alt: "Classical wrapped V-belts for industrial drives" },
-      { src: coggedDivisionPhoto, alt: "Raw-edge cogged drive belts" },
-      { src: "/product-images/conveyor-belts/rubber-conveyor-belt.png", alt: "Rubber conveyor belting" },
-      { src: "/product-images/conveyor-belts/cleated-conveyor-belt.png", alt: "Cleated conveyor belt profile" },
+      { src: classicalDivisionPhoto, alt: "Classical wrapped V-belts for industrial drives", fit: "contain" },
+      { src: coggedDivisionPhoto, alt: "Raw-edge cogged drive belts", fit: "contain" },
+      { src: "/product-images/conveyor-belts/rubber-conveyor-belt.png", alt: "Rubber conveyor belting", fit: "contain" },
+      { src: "/product-images/conveyor-belts/cleated-conveyor-belt.png", alt: "Cleated conveyor belt profile", fit: "contain" },
     ],
   },
   automation: {
@@ -232,6 +232,10 @@ export const dealerRelationships = {
   title: "Authorized dealers and distributors",
   description: "Our dealer authorizations, partner certificates and recognition. Select an image to view it in detail.",
   viewLabel: "View image",
+  enlargeLabel: "View full certificate",
+  viewerLabel: "Certificate document",
+  fitHint: "Use Zoom in to read the certificate details.",
+  zoomHint: "Scroll sideways and down to read. Select Fit to screen to see the full document.",
   zoomLabel: "Zoom in",
   fitLabel: "Fit to screen",
   previousLabel: "Previous image",
