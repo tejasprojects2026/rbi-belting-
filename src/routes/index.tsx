@@ -7,14 +7,14 @@ import {
   Handshake,
   MessageSquareText,
   PackageCheck,
-  type LucideIcon,
+  ShieldCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandStrip, PillarCards, SectionHeading } from "@/components/page-sections";
 import { EnquiryDialog } from "@/components/enquiry";
 import { DealerRelationships } from "@/components/dealer-relationships";
 import { IndustryShowcase } from "@/components/industry-showcase";
-import { allBrands, logoBrands, upcomingRange } from "@/lib/site-data";
+import { allBrands, brandPartnersContent, logoBrands, serviceBenefits, upcomingRange } from "@/lib/site-data";
 import { pageHead } from "@/lib/seo";
 import hero from "@/assets/factory-hero.jpg";
 
@@ -130,14 +130,8 @@ function Home() {
       <section className="bg-foreground py-16 text-background">
         <div className="site-container">
           <SectionHeading
-            eyebrow="Authorized supply"
-            title={
-              <>
-                 <span className="block whitespace-nowrap text-[1.05rem] leading-[1.08] min-[390px]:text-[1.25rem] sm:hidden">Fast-moving brands for</span>
-                 <span className="block whitespace-nowrap text-[1.05rem] leading-[1.08] min-[390px]:text-[1.25rem] sm:hidden">urgent industrial requirements</span>
-                <span className="hidden sm:inline">Fast-moving brands for urgent industrial requirements</span>
-              </>
-            }
+            eyebrow={brandPartnersContent.eyebrow}
+            title={brandPartnersContent.title}
           />
           <BrandStrip brands={logoBrands} />
           <section className="mt-12 md:mt-16" aria-label="Dealer relationships">
@@ -200,20 +194,17 @@ function Home() {
               </>
             }
           />
-          <div className="grid gap-5 md:grid-cols-3">
-            {(
-              [
-                [PackageCheck, "Stock depth", "A broad multi-brand range for planned maintenance and urgent replacements."],
-                [Handshake, "Application support", "Tell us the machine, size or part code. We help narrow the options."],
-                [Globe2, "Wide service reach", "Supply across India, with support for Middle East, Australia and Southeast Asia enquiries."],
-              ] as [LucideIcon, string, string][]
-            ).map(([Icon, title, description]) => (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {serviceBenefits.map(({ title, description }, index) => {
+              const Icon = [PackageCheck, MessageSquareText, ShieldCheck, Handshake, Globe2][index];
+              return (
               <article key={title} className="border-t-4 border-primary bg-background p-7">
                 <Icon className="text-primary" />
                 <h3 className="mt-5 text-xl font-black">{title}</h3>
                 <p className="mt-3 leading-7 text-muted-foreground">{description}</p>
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

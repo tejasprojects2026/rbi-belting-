@@ -13,6 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
+  describeType,
   productRangeContent,
   productVideoShowcases,
   type Pillar,
@@ -121,7 +122,12 @@ export function ProductRangeDialog({
                           className="mt-0.5 size-3.5 shrink-0 text-category/80"
                           aria-hidden="true"
                         />
-                        <span>{type}</span>
+                        <div>
+                          <span>{type}</span>
+                          {sub.slug === "v-belts" && (
+                            <p className="mt-1 text-xs font-normal leading-5 text-muted-foreground">{describeType(type)}</p>
+                          )}
+                        </div>
                       </li>
                     ))}
                   </ul>

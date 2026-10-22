@@ -57,7 +57,7 @@ function frameTransform({ width, height, sourceCorners }: CertificateFrame) {
 }
 
 function CertificateImage({ certificate }: { certificate: DealerCertificate }) {
-  const alt = `${certificate.brand}: ${certificate.title}`;
+  const alt = `${certificate.brand}: ${certificate.title}. ${certificate.detail}`;
 
   if (certificate.frame) {
     const { width, height } = certificate.frame;

@@ -101,11 +101,11 @@ function Contact() {
             <ContactItem Icon={MapPin} title="Visit us">
               Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate, Pune 411026
             </ContactItem>
-            <ContactItem Icon={Phone} title="Call sales">
+            <ContactItem Icon={Phone} title="Call Sales">
               <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
                 <a href="tel:+918788195839" className="whitespace-nowrap">+91 87881 95839</a>
                 <span aria-hidden="true">/</span>
-                <a href="tel:+919890961752" className="whitespace-nowrap">+91 98909 61752, Director</a>
+                <a href="tel:+919890961752" className="whitespace-nowrap">+91 98909 61752</a>
               </div>
             </ContactItem>
             <ContactItem Icon={Mail} title="Email">
