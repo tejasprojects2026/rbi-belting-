@@ -1,4 +1,130 @@
+import { DealerRelationships } from "@/components/dealer-relationships";
 import { companyLeadership } from "@/lib/site-data";
 import { CompanyTimeline } from "@/components/company-timeline";
-import {createFileRoute} from "@tanstack/react-router";import {Eye,Target,Boxes,Brain,Timer,ShieldCheck,UserRound,type LucideIcon} from "lucide-react";import {PageHero,SectionHeading} from "@/components/page-sections";import {pageHead,breadcrumbSchema} from "@/lib/seo";import hero from "@/assets/factory-hero.jpg";
-export const Route=createFileRoute("/about")({head:()=>pageHead("About RB International Belting & Automation, Pune","Learn how RB International grew from a Bhosari belting supplier into a three-division industrial partner serving manufacturers across India since 2003.","/about",breadcrumbSchema([{name:"Home",path:"/"},{name:"About",path:"/about"}])),component:About});function About(){return <><PageHero kicker="Our journey" title="The RB story: two decades of trust, delivered." description="Built in Bhosari for the factories that keep India moving. Our growth has come from stock depth, product knowledge and direct customer relationships." image={hero} compact/><section className="pattern-shared bg-muted py-20"><div className="site-container"><SectionHeading title="Our company values"/><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{([[Boxes,"Stock availability","If it exists, we have it or we will source it."],[Brain,"Technical expertise","We help solve application problems, not just sell parts."],[Timer,"Speed","2-hour response target and same-day dispatch on stocked items."],[ShieldCheck,"Trust","20+ years and no compromise on genuine products."]] as [LucideIcon,string,string][]).map(([Icon,t,d])=><article key={String(t)} className="bg-background p-6"><Icon className="text-primary"/><h3 className="mt-4 font-black">{String(t)}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{String(d)}</p></article>)}</div></div></section><section className="py-20"><div className="site-container grid gap-6 md:grid-cols-2"><article className="border-t-4 border-primary bg-muted p-8"><Eye/><h2 className="mt-5 text-3xl font-black">Vision</h2><p className="mt-4 leading-8 text-muted-foreground">To be India's most trusted single-source partner for power transmission, automation and industrial adhesive solutions.</p></article><article className="border-t-4 border-primary bg-muted p-8"><Target/><h2 className="mt-5 text-3xl font-black">Mission</h2><p className="mt-4 leading-8 text-muted-foreground">To simplify industrial procurement with a wide product range, genuine brands, application support and fast response.</p></article></div></section><CompanyTimeline/><section className="bg-foreground py-20 text-background"><div className="site-container"><SectionHeading eyebrow="Leadership" title="Founders with hands-on industrial experience"/><div className="grid gap-6 md:grid-cols-2">{companyLeadership.map(member=><article key={member.name} className="border border-background/20 p-7"><div className="grid aspect-[4/3] place-items-center overflow-hidden bg-background/5">{member.portrait?<img src={member.portrait.src} alt={`${member.name}, ${member.role} at RB International Belting & Automation`} width={member.portrait.width} height={member.portrait.height} loading="lazy" className="h-full min-h-0 w-full object-cover object-[center_20%]"/>:<UserRound className="size-20 text-background/30"/>}</div><h3 className="mt-6 text-2xl font-black">{member.name}</h3><p className="text-sm font-bold text-primary-soft">{member.role}</p><p className="mt-4 leading-7 text-background/70">{member.description} {member.note}</p></article>)}</div></div></section></>}
+import { createFileRoute } from "@tanstack/react-router";
+import {
+  Eye,
+  Target,
+  Boxes,
+  Brain,
+  Timer,
+  ShieldCheck,
+  UserRound,
+  type LucideIcon,
+} from "lucide-react";
+import { PageHero, SectionHeading } from "@/components/page-sections";
+import { pageHead, breadcrumbSchema } from "@/lib/seo";
+import hero from "@/assets/factory-hero.jpg";
+export const Route = createFileRoute("/about")({
+  head: () =>
+    pageHead(
+      "About RB International Belting & Automation, Pune",
+      "Learn how RB International grew from a Bhosari belting supplier into a three-division industrial partner serving manufacturers across India since 2003.",
+      "/about",
+      breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "About", path: "/about" },
+      ]),
+    ),
+  component: About,
+});
+function About() {
+  return (
+    <>
+      <PageHero
+        kicker="Our journey"
+        title="The RB story: two decades of trust, delivered."
+        description="Built in Bhosari for the factories that keep India moving. Our growth has come from stock depth, product knowledge and direct customer relationships."
+        image={hero}
+        compact
+      />
+      <section className="pattern-shared bg-muted py-20">
+        <div className="site-container">
+          <SectionHeading title="Our company values" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {(
+              [
+                [Boxes, "Stock availability", "If it exists, we have it or we will source it."],
+                [
+                  Brain,
+                  "Technical expertise",
+                  "We help solve application problems, not just sell parts.",
+                ],
+                [Timer, "Speed", "2-hour response target and same-day dispatch on stocked items."],
+                [ShieldCheck, "Trust", "20+ years and no compromise on genuine products."],
+              ] as [LucideIcon, string, string][]
+            ).map(([Icon, t, d]) => (
+              <article key={String(t)} className="bg-background p-6">
+                <Icon className="text-primary" />
+                <h3 className="mt-4 font-black">{String(t)}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{String(d)}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="py-20">
+        <div className="site-container grid gap-6 md:grid-cols-2">
+          <article className="border-t-4 border-primary bg-muted p-8">
+            <Eye />
+            <h2 className="mt-5 text-3xl font-black">Vision</h2>
+            <p className="mt-4 leading-8 text-muted-foreground">
+              To be India's most trusted single-source partner for power transmission, automation
+              and industrial adhesive solutions.
+            </p>
+          </article>
+          <article className="border-t-4 border-primary bg-muted p-8">
+            <Target />
+            <h2 className="mt-5 text-3xl font-black">Mission</h2>
+            <p className="mt-4 leading-8 text-muted-foreground">
+              To simplify industrial procurement with a wide product range, genuine brands,
+              application support and fast response.
+            </p>
+          </article>
+        </div>
+      </section>
+      <CompanyTimeline />
+      <section
+        className="bg-foreground py-20 text-background"
+        aria-label="Appreciation certificates"
+      >
+        <div className="site-container">
+          <DealerRelationships appreciation />
+        </div>
+      </section>
+      <section className="bg-foreground py-20 text-background">
+        <div className="site-container">
+          <SectionHeading
+            eyebrow="Leadership"
+            title="Founders with hands-on industrial experience"
+          />
+          <div className="grid gap-6 md:grid-cols-2">
+            {companyLeadership.map((member) => (
+              <article key={member.name} className="border border-background/20 p-7">
+                <div className="grid aspect-[4/3] place-items-center overflow-hidden bg-background/5">
+                  {member.portrait ? (
+                    <img
+                      src={member.portrait.src}
+                      alt={`${member.name}, ${member.role} at RB International Belting & Automation`}
+                      width={member.portrait.width}
+                      height={member.portrait.height}
+                      loading="lazy"
+                      className="h-full min-h-0 w-full object-cover object-[center_20%]"
+                    />
+                  ) : (
+                    <UserRound className="size-20 text-background/30" />
+                  )}
+                </div>
+                <h3 className="mt-6 text-2xl font-black">{member.name}</h3>
+                <p className="text-sm font-bold text-primary-soft">{member.role}</p>
+                <p className="mt-4 leading-7 text-background/70">
+                  {member.description} {member.note}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

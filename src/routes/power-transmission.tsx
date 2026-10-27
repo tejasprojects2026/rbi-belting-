@@ -1,2 +1,21 @@
-import {createFileRoute} from "@tanstack/react-router";import {CategoryPage} from "@/components/category-pages";import {pillars} from "@/lib/site-data";import {pageHead,breadcrumbSchema} from "@/lib/seo";
-const p=pillars["power-transmission"];export const Route=createFileRoute("/power-transmission")({head:()=>pageHead("Power Transmission Belts & Drives | RB International, Pune","Industrial belts, pulleys and couplings from Fenner, Gates, PIX and more. Get fast technical support and PAN India supply from Pune.","/power-transmission",breadcrumbSchema([{name:"Home",path:"/"},{name:p.name,path:"/power-transmission"}])),component:()=> <CategoryPage pillar={p}/>});
+import { createFileRoute } from "@tanstack/react-router";
+import { CategoryPage } from "@/components/category-pages";
+import { pillars } from "@/lib/site-data";
+import { pageHead, breadcrumbSchema } from "@/lib/seo";
+const p = pillars["power-transmission"];
+export const Route = createFileRoute("/power-transmission")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    product: typeof search["product"] === "string" ? search["product"] : undefined,
+  }),
+  head: () =>
+    pageHead(
+      "Power Transmission Belts & Drives | RB International, Pune",
+      "Industrial belts, pulleys and couplings from Fenner, Gates, PIX and more. Get fast technical support and PAN India supply from Pune.",
+      "/power-transmission",
+      breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: p.name, path: "/power-transmission" },
+      ]),
+    ),
+  component: () => <CategoryPage pillar={p} />,
+});

@@ -14,7 +14,10 @@ export function ProductVideoGallery({
 
   useEffect(() => {
     const players = [...playersRef.current.values()];
-    if (!active) players.forEach((player) => player.pause());
+    players.forEach((player) => {
+      if (active) void player.play().catch(() => {});
+      else player.pause();
+    });
     return () => players.forEach((player) => player.pause());
   }, [active, videos]);
 
@@ -37,24 +40,18 @@ export function ProductVideoGallery({
                 else playersRef.current.delete(video.src);
               }}
               controls
+              autoPlay={active}
+              muted
+              loop
               playsInline
               preload="metadata"
               poster={video.poster}
               aria-label={video.title}
-              onPlay={(event) => {
-                playersRef.current.forEach((player) => {
-                  if (player !== event.currentTarget) player.pause();
-                });
-              }}
               className="block h-64 w-full bg-black object-contain sm:h-72"
             >
               <source src={video.src} type="video/mp4" />
               <a href={video.src}>{productRangeContent.videoFallback}</a>
             </video>
-            <figcaption className="border-t border-border p-3 text-center">
-              <h4 className="text-base font-black leading-6">{video.title}</h4>
-              <p className="mt-1 text-xs text-muted-foreground">{video.duration}</p>
-            </figcaption>
           </figure>
         ))}
       </div>

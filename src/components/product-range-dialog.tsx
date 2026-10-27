@@ -48,7 +48,7 @@ export function ProductRangeDialog({
       <DialogContent
         className={`theme-${pillar.key} flex max-h-[94dvh] w-[calc(100%-1.5rem)] max-w-5xl flex-col gap-0 overflow-hidden rounded-2xl border-border/80 bg-background p-0 shadow-2xl sm:max-w-5xl [&>button]:grid [&>button]:size-10 [&>button]:place-items-center [&>button]:rounded-full [&>button]:bg-muted [&>button]:opacity-100`}
       >
-        <DialogHeader className="shrink-0 space-y-1 border-b border-border/70 px-5 py-4 pr-16 text-left sm:px-6 sm:pr-16">
+        <DialogHeader className="shrink-0 space-y-3 border-b border-border/70 px-5 py-4 pr-16 text-left sm:px-6 sm:pr-16">
           <p className="w-fit rounded-full bg-category/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-category">
             {pillar.name}
           </p>
@@ -58,9 +58,7 @@ export function ProductRangeDialog({
         </DialogHeader>
 
         <div className="min-h-0 overflow-y-auto overscroll-contain px-5 py-4 sm:px-6 sm:py-5">
-          <DialogDescription className="mb-5 max-w-3xl text-sm leading-6 text-muted-foreground">
-            {sub.short}
-          </DialogDescription>
+          <DialogDescription className="sr-only">{sub.short}</DialogDescription>
           <div className="grid gap-5 md:h-[clamp(20rem,48dvh,24rem)] md:grid-cols-2 md:grid-rows-[minmax(0,1fr)] md:gap-6">
             <div className="relative min-w-0 md:min-h-0">
               <ProductGallery key={sub.slug} photos={photos} active={open} compact />
@@ -125,7 +123,9 @@ export function ProductRangeDialog({
                         <div>
                           <span>{type}</span>
                           {sub.slug === "v-belts" && (
-                            <p className="mt-1 text-xs font-normal leading-5 text-muted-foreground">{describeType(type)}</p>
+                            <p className="mt-1 text-xs font-normal leading-5 text-muted-foreground">
+                              {describeType(type)}
+                            </p>
                           )}
                         </div>
                       </li>
@@ -143,9 +143,26 @@ export function ProductRangeDialog({
                   <h3 className="text-sm font-semibold text-foreground">
                     {productRangeContent.applicationsTitle}
                   </h3>
-                  <p className="mt-3 text-[15px] leading-7 text-foreground/85">
-                    {sub.applications}
-                  </p>
+                  <div className="mt-3 grid grid-cols-2 text-[13px] leading-6 text-foreground/85 lg:text-sm">
+                    {[0, 1].map((column) => (
+                      <ul
+                        key={column}
+                        className={`min-w-0 space-y-3 ${column === 0 ? "border-r border-foreground/40 pr-4" : "pl-4"}`}
+                      >
+                        {sub.applications
+                          .split("|")
+                          .filter((_, index) => index % 2 === column)
+                          .map((application) => (
+                            <li key={application.trim()} className="flex items-start gap-2">
+                              <span aria-hidden="true" className="shrink-0">
+                                •
+                              </span>
+                              <span>{application.trim()}</span>
+                            </li>
+                          ))}
+                      </ul>
+                    ))}
+                  </div>
                 </TabsContent>
 
                 <TabsContent

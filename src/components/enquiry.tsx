@@ -1,3 +1,4 @@
+import { validateBrochurePhone, validateBrochureEmail } from "@/lib/brochure-validation";
 import { useState } from "react";
 import { Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ export function buildMessage(details: EnquiryDetails) {
 
 export function EnquiryForm({ seed = {}, compact = false, hideWhatsApp = false, submitLabel = "Submit your inquiry", variant = "product" }: { seed?: EnquirySeed; compact?: boolean; hideWhatsApp?: boolean; submitLabel?: string; variant?: "product" | "general" }) {
   const [error, setError] = useState("");
+  const [phoneError, setPhoneError] = useState<string | undefined>();
 
   const send = (kind: "email" | "wa", form: HTMLFormElement) => {
     const formData = new FormData(form);
@@ -43,6 +45,13 @@ export function EnquiryForm({ seed = {}, compact = false, hideWhatsApp = false, 
       setError("Please add your name, phone number and requirement.");
       return;
     }
+    const invalidPhone = validateBrochurePhone(details.phone);
+    setPhoneError(invalidPhone);
+    if (invalidPhone) { form.querySelector<HTMLInputElement>('[name="phone"]')?.focus(); return; }
+    if (details.email.trim()) {
+      const invalidEmail = validateBrochureEmail(details.email);
+      if (invalidEmail) { setError(invalidEmail); return; }
+    }
     setError("");
     const message = buildMessage(details);
     window.location.href = kind === "email"
@@ -55,7 +64,7 @@ export function EnquiryForm({ seed = {}, compact = false, hideWhatsApp = false, 
       <div className="grid gap-4 sm:grid-cols-2">
         <div><Label htmlFor="eq-name">Name *</Label><Input id="eq-name" name="name" required maxLength={100} className="mt-1 h-12" /></div>
         <div><Label htmlFor="eq-company">Company</Label><Input id="eq-company" name="company" maxLength={120} className="mt-1 h-12" /></div>
-        <div><Label htmlFor="eq-phone">Phone *</Label><Input id="eq-phone" name="phone" type="tel" required maxLength={20} className="mt-1 h-12" /></div>
+        <div><Label htmlFor="eq-phone">Phone *</Label><Input id="eq-phone" name="phone" aria-invalid={!!phoneError} aria-describedby="eq-phone-error" onChange={event=>setPhoneError(validateBrochurePhone(event.currentTarget.value))} onBlur={event=>setPhoneError(validateBrochurePhone(event.currentTarget.value))} type="tel" required maxLength={20} className="mt-1 h-12" /><p id="eq-phone-error" role="alert" className="mt-1 text-sm text-destructive">{phoneError}</p></div>
         <div><Label htmlFor="eq-email">Email</Label><Input id="eq-email" name="email" type="email" maxLength={200} className="mt-1 h-12" /></div>
       </div>
       <div>

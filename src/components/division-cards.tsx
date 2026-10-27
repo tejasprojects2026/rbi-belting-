@@ -28,9 +28,12 @@ function DivisionPhotos({ name, photos }: { name: string; photos: readonly Divis
     const update = () => setReducedMotion(motion.matches);
     update();
     motion.addEventListener("change", update);
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
-      threshold: 0.15,
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry?.isIntersecting ?? false),
+      {
+        threshold: 0.15,
+      },
+    );
     if (frame.current) observer.observe(frame.current);
     return () => {
       motion.removeEventListener("change", update);
@@ -78,7 +81,7 @@ function DivisionPhotos({ name, photos }: { name: string; photos: readonly Divis
           {photos.map((photo, index) => (
             <CarouselItem
               key={photo.src}
-              className="aspect-[16/10] pl-0"
+              className="relative aspect-[16/10] overflow-hidden pl-0"
               aria-hidden={selected !== index}
             >
               <img
@@ -89,34 +92,19 @@ function DivisionPhotos({ name, photos }: { name: string; photos: readonly Divis
                 loading={index <= 1 ? "eager" : "lazy"}
                 decoding="async"
                 draggable={false}
-                className={photo.fit === "contain" ? "size-full object-contain" : "size-full object-cover"}
+                className="absolute inset-0 size-full object-cover object-center"
               />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 bg-foreground px-3 py-2">
+        <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center px-3">
           <span
-            className="min-w-7 text-[11px] font-semibold tabular-nums text-white"
-            aria-hidden="true"
+            className="w-fit max-w-full rounded-sm border border-border bg-background/95 px-3 py-1.5 text-center text-xs font-bold text-foreground shadow-sm"
+            aria-live="polite"
+            aria-atomic="true"
           >
-            {selected + 1} / {photos.length}
+            {photos[selected]?.label ?? photos[selected]?.alt ?? name}
           </span>
-          <div className="flex items-center" role="group" aria-label="Choose division image">
-            {photos.map((photo, index) => (
-              <button
-                key={photo.src}
-                type="button"
-                className="grid size-6 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                aria-label={`Show image ${index + 1}: ${photo.alt}`}
-                aria-pressed={selected === index}
-                onClick={() => api?.scrollTo(index)}
-              >
-                <span
-                  className={`block size-1.5 rounded-full ${selected === index ? "bg-white" : "bg-white/45"}`}
-                />
-              </button>
-            ))}
-          </div>
         </div>
       </Carousel>
     </div>

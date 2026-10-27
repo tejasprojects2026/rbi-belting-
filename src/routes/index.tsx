@@ -3,11 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
   Factory,
-  Globe2,
   Handshake,
   MessageSquareText,
   PackageCheck,
-  ShieldCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandStrip, PillarCards, SectionHeading } from "@/components/page-sections";
@@ -73,12 +71,14 @@ function Home() {
           fetchPriority="high"
         />
         <div className="absolute inset-0 hidden bg-foreground/75 md:block" />
-        <div className="site-container relative flex items-end py-8 text-background md:min-h-[82vh] md:pb-10 md:pt-24">
+        <div className="site-container relative flex items-start py-8 text-background md:min-h-[calc(100svh-5rem-1px)] md:items-center md:py-10">
           <div className="w-full max-w-6xl">
             <div className="max-w-5xl">
               <p className="eyebrow text-primary-soft">Powering industry since 2003</p>
-              <h1 className="mt-5 text-4xl font-black leading-[1.08] md:text-6xl lg:text-7xl">
-                India's trusted partner in power transmission, automation & industrial adhesives
+              <h1 className="mt-5 text-4xl font-black leading-[1.08] md:text-[clamp(2rem,4vw,3.5rem)]">
+                <span className="md:block md:whitespace-nowrap">India's trusted partner in</span>{" "}
+                <span className="md:block md:whitespace-nowrap">power transmission,</span>{" "}
+                <span className="md:block md:whitespace-nowrap">automation &amp; industrial adhesives</span>
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-background/80">
                 Supplying critical belts, automation components and MRO adhesives from Pune to manufacturers across India and export markets.
@@ -116,7 +116,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="divisions" className="pattern-shared py-20">
+      <section id="divisions" className="pattern-shared pb-20 pt-10">
         <div className="site-container">
           <SectionHeading
             eyebrow="Complete industrial supply"
@@ -196,7 +196,7 @@ function Home() {
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {serviceBenefits.map(({ title, description }, index) => {
-              const Icon = [PackageCheck, MessageSquareText, ShieldCheck, Handshake, Globe2][index];
+              const Icon = [PackageCheck, MessageSquareText, Handshake][index] ?? Handshake;
               return (
               <article key={title} className="border-t-4 border-primary bg-background p-7">
                 <Icon className="text-primary" />

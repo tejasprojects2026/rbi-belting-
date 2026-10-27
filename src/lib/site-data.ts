@@ -24,7 +24,7 @@ const imageDescriptions: Record<string, string> = {
 export const getImageAlt = (src: string, fallback: string) => imageDescriptions[src] ?? fallback;
 
 export type PillarKey = "power-transmission" | "automation" | "adhesives";
-export type DivisionCardPhoto = { src: string; alt: string; fit?: "cover" | "contain" };
+export type DivisionCardPhoto = { src: string; alt: string; label?: string; fit?: "cover" | "contain" };
 export const divisionCardContent = {
   divisionLabel: "Division",
   linkLabel: "Explore range",
@@ -34,11 +34,11 @@ export const divisionCards: Record<PillarKey, { title: string; description: stri
     title: "Power Transmission",
     description: "Belts, pulleys and couplings for reliable industrial drives and conveying.",
     photos: [
-      { src: powerDivisionPhoto, alt: "Industrial drive belts and pulleys on production machinery" },
-      { src: classicalDivisionPhoto, alt: "Classical wrapped V-belts for industrial drives", fit: "contain" },
-      { src: coggedDivisionPhoto, alt: "Raw-edge cogged drive belts", fit: "contain" },
-      { src: "/product-images/conveyor-belts/rubber-conveyor-belt.png", alt: "Rubber conveyor belting", fit: "contain" },
-      { src: "/product-images/conveyor-belts/cleated-conveyor-belt.png", alt: "Cleated conveyor belt profile", fit: "contain" },
+      { src: powerDivisionPhoto, alt: "Industrial drive belts and pulleys on production machinery", label: "Drive Belts & Pulleys" },
+      { src: classicalDivisionPhoto, alt: "Classical wrapped V-belts for industrial drives", label: "Classical V-Belts", fit: "contain" },
+      { src: coggedDivisionPhoto, alt: "Raw-edge cogged drive belts", label: "Cogged V-Belts", fit: "contain" },
+      { src: "/product-images/conveyor-belts/rubber-conveyor-belt.png", alt: "Rubber conveyor belting", label: "Rubber Conveyor Belts", fit: "contain" },
+      { src: "/product-images/conveyor-belts/cleated-conveyor-belt.png", alt: "Cleated conveyor belt profile", label: "Cleated Conveyor Belts", fit: "contain" },
     ],
   },
   automation: {
@@ -69,12 +69,10 @@ export const brandPartnersContent = {
 export const serviceBenefits = [
   { title: "Same-Day Dispatch", description: "Stocked items shipped the same day from our Pune warehouse." },
   { title: "2-Hour Response", description: "Submit your requirement. Our team gets back within 2 business hours." },
-  { title: "Genuine Products Only", description: "Authorized dealer for Gates, Fenner, PIX, Pidilite. No grey market. No duplicates." },
   { title: "Application Support", description: "Share your machine, size, or part code. We help you find the exact match." },
-  { title: "PAN India + Export", description: "Serving Maharashtra, Gujarat, Tamil Nadu, Karnataka, Rajasthan, MP, and export markets." },
 ];
 export const footerContact = {
-  description: "RB International Belting & Automation, Pune. Authorized dealers for Gates, Fenner, PIX, Pidilite. Suppliers of V-belts, timing belts, conveyor belts, ball screws, servo motors, industrial adhesives. Serving manufacturers across India since 2003.",
+  description: "RB International Belting & Automation, Pune. Authorized dealers for Gates, Fenner, PIX, Pidilite. Suppliers of V-belts, timing belts, conveyor belts, ball screws, servo motors, industrial adhesives.",
   email: "sales@rbcorp.in",
   gst: "27AAHFR3595G1ZU",
   address: "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate, Pune 411026",
@@ -396,6 +394,18 @@ export const dealerCertificates: readonly DealerCertificate[] = [
     previewCropPosition: "center 45%",
   },
 ];
+export const appreciationCertificates = dealerCertificates.filter((certificate) =>
+  ["wd40-platinum-2022-23", "3m-appreciation", "indiamart-trust-seal", "wd40-platinum-recognition"].includes(certificate.id),
+);
+export const authorizationCertificates = dealerCertificates.filter(
+  (certificate) => !appreciationCertificates.includes(certificate),
+);
+export const appreciationContent = {
+  eyebrow: "Awards & recognition",
+  title: "Appreciation certificates",
+  description: "Certificates of appreciation, recognition and trust from our industry partners.",
+};
+
 export const getBrandLogo = (brand: string) => brandLogos[brandLogoAliases[brand] ?? brand];
 export const justdialReviews = {
   title: "Customer reviews",
@@ -434,7 +444,7 @@ export const reviewPlatforms = [
     source: "Google",
     title: "Customer reviews",
     description: "Read customer feedback and share your experience on Google.",
-    listingUrl: "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
+    listingUrl: "https://www.google.com/maps/place/R+B+International+Belting/@18.6224152,73.8385942,17z/data=!4m8!3m7!1s0x3bc2b87e4ebf7891:0x9d55af8e16815d4c!8m2!3d18.6224152!4d73.8385942!9m1!1b1!16s%2Fg%2F11f52g4513",
     linkLabel: "Read reviews",
     linkAccessibleLabel: "View RB International on Google Maps",
     rating: 4.9,
@@ -511,3 +521,8 @@ export const industries = [
 ] as const;
 export const navItems=[{label:"Home",to:"/"},{label:"About",to:"/about"},{label:"Power Transmission",to:"/power-transmission"},{label:"Automation",to:"/automation"},{label:"Adhesives",to:"/adhesives"},{label:"Contact",to:"/contact"},{label:"Franchise",to:"/franchise"}] as const;
 export const searchItems=pillarList.flatMap(p=>p.subcategories.flatMap(s=>[{name:s.name,to:`/${p.key}/${s.slug}`,keywords:[s.name,...s.types,...s.brands].join(" ").toLowerCase()},...s.types.map(t=>({name:t,to:`/${p.key}/${s.slug}`,keywords:`${t} ${s.name} ${s.brands.join(" ")}`.toLowerCase()}))]));
+
+export const googleReviewsWidget = {
+  appId: "3ffaff46-4d07-4d7b-b47f-0a32dd927546",
+  scriptSrc: "https://elfsightcdn.com/platform.js",
+};

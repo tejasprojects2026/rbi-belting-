@@ -1,5 +1,5 @@
 import { useRef, useState, type CSSProperties } from "react";
-import { ArrowLeft, ArrowRight, Maximize2, ZoomIn, ZoomOut } from "lucide-react";
+import { ArrowLeft, ArrowRight, ZoomIn, ZoomOut } from "lucide-react";
 import { SectionHeading } from "@/components/page-sections";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +10,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
-  dealerCertificates,
+  authorizationCertificates,
+  appreciationCertificates,
+  appreciationContent,
   dealerRelationships,
   type CertificateFrame,
   type DealerCertificate,
@@ -100,18 +102,20 @@ function CertificateImage({ certificate }: { certificate: DealerCertificate }) {
   );
 }
 
-export function DealerRelationships() {
+export function DealerRelationships({ appreciation = false }: { appreciation?: boolean }) {
+  const certificates = appreciation ? appreciationCertificates : authorizationCertificates;
+  const content = appreciation ? appreciationContent : dealerRelationships;
   const [selected, setSelected] = useState<number | null>(null);
   const [zoomed, setZoomed] = useState(false);
   const viewerRef = useRef<HTMLDivElement>(null);
-  const active = selected === null ? undefined : dealerCertificates[selected];
+  const active = selected === null ? undefined : certificates[selected];
   const documentWidth = active ? (active.frame?.width ?? active.width) : 0;
   const documentHeight = active ? (active.frame?.height ?? active.height) : 0;
 
   const resetScroll = () => viewerRef.current?.scrollTo({ left: 0, top: 0 });
 
   const select = (index: number) => {
-    setSelected((index + dealerCertificates.length) % dealerCertificates.length);
+    setSelected((index + certificates.length) % certificates.length);
     setZoomed(false);
     resetScroll();
   };
@@ -120,13 +124,13 @@ export function DealerRelationships() {
     <>
       <div className="[&_.text-muted-foreground]:text-background/70">
         <SectionHeading
-          eyebrow={dealerRelationships.eyebrow}
-          title={dealerRelationships.title}
-          text={dealerRelationships.description}
+          eyebrow={content.eyebrow}
+          title={content.title}
+          text={content.description}
         />
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {dealerCertificates.map((certificate, index) => (
+        {certificates.map((certificate, index) => (
           <article
             key={certificate.id}
             className="flex min-w-0 flex-col overflow-hidden rounded-md border border-background/20 bg-background/5"
@@ -148,10 +152,6 @@ export function DealerRelationships() {
                 <span className="absolute inset-1 block sm:inset-3">
                   <CertificateImage certificate={certificate} />
                 </span>
-              </span>
-              <span className="flex min-h-11 items-center justify-center gap-2 border-t border-border px-3 py-2 text-sm font-semibold text-primary transition-colors group-hover:bg-muted">
-                <Maximize2 className="size-4" aria-hidden="true" />
-                {dealerRelationships.enlargeLabel}
               </span>
             </button>
             <div className="flex flex-1 flex-col px-5 py-4">
@@ -222,7 +222,7 @@ export function DealerRelationships() {
                     <ArrowLeft />
                   </Button>
                   <span className="min-w-12 text-center text-sm tabular-nums" aria-live="polite">
-                    {(selected ?? 0) + 1} / {dealerCertificates.length}
+                    {(selected ?? 0) + 1} / {certificates.length}
                   </span>
                   <Button
                     variant="outline"
