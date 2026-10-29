@@ -14,80 +14,11 @@ import {
   appreciationCertificates,
   appreciationContent,
   dealerRelationships,
-  type CertificateFrame,
   type DealerCertificate,
 } from "@/lib/site-data";
 
-// Map the photographed document's four corners onto a straight rectangle.
-// CSS changes its presentation while preserving the original image and text.
-function frameTransform({ width, height, sourceCorners }: CertificateFrame) {
-  const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = sourceCorners;
-  const dx1 = x1 - x2,
-    dx2 = x3 - x2,
-    dx3 = x0 - x1 + x2 - x3;
-  const dy1 = y1 - y2,
-    dy2 = y3 - y2,
-    dy3 = y0 - y1 + y2 - y3;
-  const denominator = dx1 * dy2 - dx2 * dy1;
-  const g = (dx3 * dy2 - dx2 * dy3) / denominator;
-  const h = (dx1 * dy3 - dx3 * dy1) / denominator;
-  const a = x1 - x0 + g * x1,
-    b = x3 - x0 + h * x3,
-    c = x0;
-  const d = y1 - y0 + g * y1,
-    e = y3 - y0 + h * y3,
-    f = y0;
-  const scale = a * e - b * d;
-  return `matrix3d(${[
-    ((e - f * h) * width) / scale,
-    ((f * g - d) * height) / scale,
-    0,
-    (d * h - e * g) / scale,
-    ((c * h - b) * width) / scale,
-    ((a - c * g) * height) / scale,
-    0,
-    (b * g - a * h) / scale,
-    0,
-    0,
-    1,
-    0,
-    ((b * f - c * e) * width) / scale,
-    ((c * d - a * f) * height) / scale,
-    0,
-    1,
-  ].join(",")})`;
-}
-
 function CertificateImage({ certificate }: { certificate: DealerCertificate }) {
   const alt = `${certificate.brand}: ${certificate.title}. ${certificate.detail}`;
-
-  if (certificate.frame) {
-    const { width, height } = certificate.frame;
-    return (
-      <svg viewBox={`0 0 ${width} ${height}`} className="size-full" role="img" aria-label={alt}>
-        <foreignObject width={width} height={height}>
-          <div style={{ width, height, position: "relative", overflow: "hidden" }}>
-            <img
-              src={certificate.image}
-              alt=""
-              width={certificate.width}
-              height={certificate.height}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: certificate.width,
-                height: certificate.height,
-                maxWidth: "none",
-                transformOrigin: "0 0",
-                transform: frameTransform(certificate.frame),
-              }}
-            />
-          </div>
-        </foreignObject>
-      </svg>
-    );
-  }
 
   return (
     <img
@@ -109,8 +40,8 @@ export function DealerRelationships({ appreciation = false }: { appreciation?: b
   const [zoomed, setZoomed] = useState(false);
   const viewerRef = useRef<HTMLDivElement>(null);
   const active = selected === null ? undefined : certificates[selected];
-  const documentWidth = active ? (active.frame?.width ?? active.width) : 0;
-  const documentHeight = active ? (active.frame?.height ?? active.height) : 0;
+  const documentWidth = active ? active.width : 0;
+  const documentHeight = active ? active.height : 0;
 
   const resetScroll = () => viewerRef.current?.scrollTo({ left: 0, top: 0 });
 
@@ -145,7 +76,7 @@ export function DealerRelationships({ appreciation = false }: { appreciation?: b
                 className="relative block aspect-(--certificate-aspect) sm:aspect-[4/3]"
                 style={
                   {
-                    "--certificate-aspect": `${certificate.frame?.width ?? certificate.width} / ${certificate.frame?.height ?? certificate.height}`,
+                    "--certificate-aspect": `${certificate.width} / ${certificate.height}`,
                   } as CSSProperties
                 }
               >
