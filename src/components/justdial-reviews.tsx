@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowUpRight, Star } from "lucide-react";
+import { mountReviews } from "@/lib/vendor/rb-reviews-carousel";
 import { Button } from "@/components/ui/button";
-import { googleReviewsWidget, reviewPlatforms } from "@/lib/site-data";
+import { customerReviews, reviewPlatforms } from "@/lib/site-data";
 
 export function JustdialReviews() {
   return (
@@ -14,7 +15,7 @@ export function JustdialReviews() {
           Customer reviews and business enquiries
         </h2>
         <div className="grid divide-y divide-border md:min-h-[276px] md:grid-cols-2 md:divide-x md:divide-y-0">
-          <GoogleReviewsEmbed />
+          <GoogleReviewsCarousel />
           <div className="grid min-h-0 grid-rows-2 divide-y divide-border">
             {reviewPlatforms
               .filter((platform) => platform.id !== "google")
@@ -96,21 +97,17 @@ export function JustdialReviews() {
   );
 }
 
-function GoogleReviewsEmbed() {
+function GoogleReviewsCarousel() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (document.querySelector(`script[src="${googleReviewsWidget.scriptSrc}"]`)) return;
-    const script = document.createElement("script");
-    script.src = googleReviewsWidget.scriptSrc;
-    script.async = true;
-    document.head.appendChild(script);
+    if (!containerRef.current) return;
+    return mountReviews(containerRef.current, customerReviews);
   }, []);
 
   return (
-    <article
-      className="min-h-[276px] min-w-0 px-4 py-3 lg:px-6"
-      aria-label="Google customer reviews"
-    >
-      <div className={`elfsight-app-${googleReviewsWidget.appId}`} data-elfsight-app-lazy />
+    <article className="min-w-0 px-4 py-6 lg:px-6" aria-label="Google customer reviews">
+      <div ref={containerRef} />
     </article>
   );
 }

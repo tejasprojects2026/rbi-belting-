@@ -448,9 +448,9 @@ export const reviewPlatforms = [
     linkLabel: "Read reviews",
     linkAccessibleLabel: "View RB International on Google Maps",
     rating: 4.9,
-    reviewCount: 1020,
+    reviewCount: 1021,
     reviewCountLabel: "reviews",
-    ratingsCheckedOn: "2026-10-19",
+    ratingsCheckedOn: "2026-10-27",
   },
   {
     id: "indiamart",
@@ -523,7 +523,84 @@ export const industries = [
 export const navItems=[{label:"Home",to:"/"},{label:"About",to:"/about"},{label:"Power Transmission",to:"/power-transmission"},{label:"Automation",to:"/automation"},{label:"Adhesives",to:"/adhesives"},{label:"Contact",to:"/contact"},{label:"Franchise",to:"/franchise"}] as const;
 export const searchItems=pillarList.flatMap(p=>p.subcategories.flatMap(s=>[{name:s.name,to:`/${p.key}/${s.slug}`,keywords:[s.name,...s.types,...s.brands].join(" ").toLowerCase()},...s.types.map(t=>({name:t,to:`/${p.key}/${s.slug}`,keywords:`${t} ${s.name} ${s.brands.join(" ")}`.toLowerCase()}))]));
 
-export const googleReviewsWidget = {
-  appId: "3ffaff46-4d07-4d7b-b47f-0a32dd927546",
-  scriptSrc: "https://elfsightcdn.com/platform.js",
+// Supplied Google Maps review snapshot, collected 27 October 2026.
+export const customerReviews = {
+  business: {
+    name: 'R B International Belting',
+    rating: 4.9,
+    total: 1021,
+    url: 'https://maps.app.goo.gl/ZxpSzXR6i1a6FpYD9'
+  },
+
+  reviews: [
+    {
+      author: 'Rohit channe',
+      rating: 5,
+      date: '2026-10-06',
+      text: 'Satisfied with the product quality The belt runs smoothly and has good strength and durability.'
+    },
+    {
+      author: 'Gaurav Washimkar',
+      rating: 5,
+      date: '2026-10-06',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXFYZC5aRl2aRhI8y-IImmUQaahz_Okw3XTGXXxYqGTzezyWuK3',
+      text: 'Excellent service and very fast good comunication',
+      photos: [
+        'https://lh3.googleusercontent.com/grass-cs/AABkmLezAoMaBql8nsi_kI0tAKsIzpaLuqNXIXKjrl4OXtaAk4UGq_WsQJrRlriO0roluL7ZxOppaJBWq1hmEbdlCD5GSX8_93_veatUEzrBU-OnokWYXBbY-jPU5oiTvnO7xCNL67X7Udj2Pjw1'
+      ]
+    },
+    {
+      author: 'Eknath Pore',
+      rating: 5,
+      date: '2026-09-27',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXtLC9c6gbDBZtOrFozsBhRBXBULk6M0faedEF1h3SMjI0e-3c4',
+      text: 'Good quality v- belt with perfect fitting smooth operation and reliable performance durable and suitable for industrial use.'
+    },
+    {
+      author: 'Aniket Parande',
+      rating: 5,
+      date: '2026-09-27',
+      text: 'Excellent v belt quality with proper fitting smooth running and good durability reliable for regular industrial use'
+    },
+    {
+      author: 'Ravinder Suryawanshi',
+      rating: 5,
+      date: '2026-09-27',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXl58yXSGO70zwosnSs6vF2ShC7ym__AIhQR0keWojLvb38lsin',
+      text: 'Excellent conveyor belt quality with strong material proper fitting and smooth movement reliable for continuous industries use'
+    },
+    {
+      author: 'mahesh gurav',
+      rating: 5,
+      date: '2026-09-27',
+      text: 'Good quality pully with precise fitting smooth rotation and durable construction reliable for industrial applications'
+    },
+    {
+      author: 'Atul desai',
+      rating: 5,
+      date: '2026-06-27',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXOotP60d-XqULFRvMuDhs2n8FBcwbwa1eZzuSCSWiQzHLNuGE',
+      text: 'They have all types and all sizes belts at reasonable rates. And very fast service.'
+    },
+    {
+      author: 'Manjeet Singh',
+      rating: 5,
+      date: '2026-02-27',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjWUtMsxIq4UIf2jAhQdAEGoUU_f_CZ2or8jiWHMQSFdJVju47Q',
+      text: 'I’m glad to rate this store. Great and reliable products available here. All range of timing belts available at competitive prices.',
+      photos: [
+        'https://lh3.googleusercontent.com/grass-cs/AABkmLdvTUWiEyXEZokJPQPw6F54Gv3Utp2UmuAAho81KeXz5nlm_cp3B_cE5E6dzsuokP4gYTnL1ABh71Y0_KNKQeNy6rXCsKG0mTHSB836CG_3K1scAeEzY4KXi3T7iyB6gqVFCR2lGZ9sJDM7'
+      ]
+    },
+    {
+      author: 'Dhiraj Vikas Shinde',
+      rating: 5,
+      date: '2026-01-27',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjVr-OuB4nvEvUhGVrxWuaDNsZmHPVgFTXFrdXTPijNrPGK68j8eaA',
+      text: 'Excellent quality products and reliable service. R B International Belting Company provides durable and high-performance belts. Their team is professional, responsive, and always delivers on time. Highly recommended.',
+      photos: [
+        'https://lh3.googleusercontent.com/grass-cs/AABkmLdoHGTomUAzm6Wm17BHCDFDN0h_rUqJCJLNg7O5CcT8UbQ9U1qnxAwRfjtb_ga92yKr-5EN7rDo-nYs-QmxjgKqxO6HCKN1HYGdBkwN3EtmGzPsRYo1-k0LFr418ih1zvTF2qi7wA8-AzUR'
+      ]
+    }
+  ]
 };
