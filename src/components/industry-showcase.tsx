@@ -18,7 +18,7 @@ export function IndustryShowcase() {
   const photo = photos[activeIndustry.image];
 
   return (
-    <section id="industry-coverage" aria-label={industryCoverage.eyebrow} className="pb-20 pt-6">
+    <section id="industry-coverage" aria-label={industryCoverage.eyebrow} className="pattern-shared pb-20 pt-6">
       <div className="site-container">
         <SectionHeading eyebrow={industryCoverage.eyebrow} title={industryCoverage.title} />
         <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-8">

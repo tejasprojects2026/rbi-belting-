@@ -63,7 +63,7 @@ function About() {
           </div>
         </div>
       </section>
-      <section className="py-20">
+      <section className="pattern-shared py-20">
         <div className="site-container grid gap-6 md:grid-cols-2">
           <article className="border-t-4 border-primary bg-muted p-8">
             <Eye />
@@ -85,14 +85,14 @@ function About() {
       </section>
       <CompanyTimeline />
       <section
-        className="bg-foreground py-20 text-background"
+        className="pattern-shared content-surface py-20 text-foreground"
         aria-label="Appreciation certificates"
       >
         <div className="site-container">
           <DealerRelationships appreciation />
         </div>
       </section>
-      <section className="bg-foreground py-20 text-background">
+      <section className="pattern-shared content-surface py-20 text-foreground">
         <div className="site-container">
           <SectionHeading
             eyebrow="Leadership"

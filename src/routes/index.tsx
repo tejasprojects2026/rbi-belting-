@@ -127,7 +127,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-foreground py-16 text-background">
+      <section className="pattern-shared content-surface py-16 text-foreground">
         <div className="site-container">
           <SectionHeading
             eyebrow={brandPartnersContent.eyebrow}
@@ -140,7 +140,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="pb-6 pt-20" aria-label={upcomingRange.title}>
+      <section className="pattern-shared pb-6 pt-20" aria-label={upcomingRange.title}>
         <div className="site-container grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-10">
           <div className="min-w-0">
             <SectionHeading
@@ -209,7 +209,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-primary py-14 text-primary-foreground">
+      <section className="pattern-shared content-surface py-14 text-foreground">
         <div className="site-container flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div>
             <h2 className="text-3xl font-black">Have a specific requirement?</h2>

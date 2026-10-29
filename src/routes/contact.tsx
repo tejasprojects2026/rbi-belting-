@@ -121,7 +121,7 @@ function Contact() {
           </aside>
         </div>
       </section>
-      <section className="bg-background py-20">
+      <section className="pattern-shared bg-background py-20">
         <div className="site-container grid gap-10 lg:grid-cols-[.75fr_1.25fr]">
           <div>
             <p className="eyebrow">FAQ</p>
