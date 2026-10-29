@@ -13,23 +13,6 @@ import { breadcrumbSchema, pageHead } from "@/lib/seo";
 import { footerContact, formContent } from "@/lib/site-data";
 import hero from "@/assets/factory-hero.jpg";
 
-const local = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "RB International Belting & Automation",
-  telephone: ["+91 87881 95839", "+91 98909 61752"],
-  email: "response@rbibelting.in",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress:
-      "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate",
-    addressLocality: "Pune",
-    postalCode: "411026",
-    addressCountry: "IN",
-  },
-  openingHours: "Mo-Sa 09:30-18:30",
-};
-
 export const faqs = [
   {
     question: "What details should I share for a fast quotation?",
@@ -74,7 +57,7 @@ export const Route = createFileRoute("/contact")({
       "Contact RB International Belting & Automation, Pune",
       "Send your industrial belt, automation or adhesive requirement to RB International in Bhosari, Pune. Call, email or WhatsApp our sales team today.",
       "/contact",
-      [breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]), local, faqSchema],
+      [breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]), faqSchema],
     ),
   component: Contact,
 });

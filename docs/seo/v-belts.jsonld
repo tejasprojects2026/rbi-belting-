@@ -1,0 +1,207 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "LocalBusiness"
+      ],
+      "@id": "https://rbi-belting-y8in.vercel.app/#organization",
+      "name": "RB International Belting & Automation",
+      "url": "https://rbi-belting-y8in.vercel.app/",
+      "description": "RB International Belting & Automation, Pune. Authorized dealers for Gates, Fenner, PIX, Pidilite. Suppliers of V-belts, timing belts, conveyor belts, ball screws, servo motors, industrial adhesives.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rbi-belting-y8in.vercel.app/assets/rb-logo-cwZst9wj.jpeg"
+      },
+      "image": "https://rbi-belting-y8in.vercel.app/assets/rb-logo-cwZst9wj.jpeg",
+      "telephone": [
+        "+918788195839",
+        "+919890961752"
+      ],
+      "email": [
+        "response@rbibelting.in",
+        "sales@rbcorp.in"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate",
+        "addressLocality": "Pune",
+        "postalCode": "411026",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Sa 09:30-18:30",
+      "hasMap": "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
+      "sameAs": [
+        "https://www.instagram.com/rbibelting/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+918788195839",
+        "email": "response@rbibelting.in"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rbi-belting-y8in.vercel.app/#website",
+      "url": "https://rbi-belting-y8in.vercel.app/",
+      "name": "RB International Belting & Automation",
+      "description": "Industrial power transmission products, automation components and industrial adhesives supplied from Pune across India and export markets.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#organization"
+      }
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts#webpage",
+      "url": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts",
+      "name": "V-Belts Supplier Pune | RB International Belting",
+      "description": "Buy v-belts for industrial applications from leading brands. Technical selection support, stock and PAN India delivery from Pune.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#website"
+      },
+      "publisher": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts#breadcrumb"
+      },
+      "about": {
+        "@id": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts#product-range"
+      },
+      "mainEntity": {
+        "@id": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts#product-types"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rbi-belting-y8in.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Power Transmission",
+          "item": "https://rbi-belting-y8in.vercel.app/power-transmission"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "V-Belts",
+          "item": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts#product-range",
+      "name": "V-Belts",
+      "description": "Classical, narrow, cogged, banded and variable speed V-belts for industrial drives.",
+      "url": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts",
+      "category": "Power Transmission",
+      "image": [
+        "https://rbi-belting-y8in.vercel.app/assets/classical-clean-OqpuwCi3.jpg",
+        "https://rbi-belting-y8in.vercel.app/assets/cogged-clean-xIt2lruH.jpg",
+        "https://rbi-belting-y8in.vercel.app/assets/banded-clean-Bh45hp1f.jpg",
+        "https://rbi-belting-y8in.vercel.app/assets/narrow-clean--iOngNIf.jpg"
+      ],
+      "brand": [
+        {
+          "@type": "Brand",
+          "name": "Fenner"
+        },
+        {
+          "@type": "Brand",
+          "name": "Gates"
+        },
+        {
+          "@type": "Brand",
+          "name": "Optibelt"
+        },
+        {
+          "@type": "Brand",
+          "name": "PIX"
+        },
+        {
+          "@type": "Brand",
+          "name": "Continental ContiTech"
+        },
+        {
+          "@type": "Brand",
+          "name": "Carlisle"
+        },
+        {
+          "@type": "Brand",
+          "name": "Hutchinson"
+        },
+        {
+          "@type": "Brand",
+          "name": "Goodyear"
+        }
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Product types",
+          "value": "Classical V-Belts, Narrow V-Belts, Micro V-Belts, Banded V-Belts, Variable Speed Belts, Link/Nutlink V-Belts, Cogged V-Belts"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Applications",
+          "value": "Air Compressors | Centrifugal Pumps | Submersible Pumps | Blowers & Exhaust Fans | Lathe Machines | Milling Machines | Grinding Machines | Textile Looms | Packaging Machines | Conveyor Drives | Crushers & Mixers | HVAC Units | Diesel Generators | Printing Machines | Rice Mill Equipment | Sugar Cane Crushers | Flour Mill Machines"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://rbi-belting-y8in.vercel.app/power-transmission/v-belts#product-types",
+      "name": "V-Belts product types",
+      "numberOfItems": 7,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Classical V-Belts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Narrow V-Belts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Micro V-Belts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Banded V-Belts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Variable Speed Belts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Link/Nutlink V-Belts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Cogged V-Belts"
+        }
+      ]
+    }
+  ]
+}

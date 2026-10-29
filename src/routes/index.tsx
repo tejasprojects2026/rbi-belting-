@@ -16,23 +16,6 @@ import { allBrands, brandPartnersContent, logoBrands, serviceBenefits, upcomingR
 import { pageHead } from "@/lib/seo";
 import hero from "@/assets/factory-hero.jpg";
 
-const org = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "RB International Belting & Automation",
-  url: "https://rbibelting.com",
-  telephone: "+91 87881 95839",
-  email: "response@rbibelting.in",
-  foundingDate: "2003",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate",
-    addressLocality: "Pune",
-    postalCode: "411026",
-    addressCountry: "IN",
-  },
-};
-
 const stats = [
   ["20+", "Years in industry"],
   ["500+", "Active clients"],
@@ -52,7 +35,6 @@ export const Route = createFileRoute("/")({
       "Industrial Belts, Automation & Adhesives | RB International Pune",
       "RB International supplies power transmission belts, automation components and industrial adhesives from Pune to 500+ manufacturers across India and export markets.",
       "/",
-      org,
     ),
   component: Home,
 });

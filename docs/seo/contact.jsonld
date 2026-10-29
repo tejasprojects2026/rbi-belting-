@@ -1,0 +1,140 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "LocalBusiness"
+      ],
+      "@id": "https://rbi-belting-y8in.vercel.app/#organization",
+      "name": "RB International Belting & Automation",
+      "url": "https://rbi-belting-y8in.vercel.app/",
+      "description": "RB International Belting & Automation, Pune. Authorized dealers for Gates, Fenner, PIX, Pidilite. Suppliers of V-belts, timing belts, conveyor belts, ball screws, servo motors, industrial adhesives.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rbi-belting-y8in.vercel.app/assets/rb-logo-cwZst9wj.jpeg"
+      },
+      "image": "https://rbi-belting-y8in.vercel.app/assets/rb-logo-cwZst9wj.jpeg",
+      "telephone": [
+        "+918788195839",
+        "+919890961752"
+      ],
+      "email": [
+        "response@rbibelting.in",
+        "sales@rbcorp.in"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate",
+        "addressLocality": "Pune",
+        "postalCode": "411026",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Sa 09:30-18:30",
+      "hasMap": "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
+      "sameAs": [
+        "https://www.instagram.com/rbibelting/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+918788195839",
+        "email": "response@rbibelting.in"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rbi-belting-y8in.vercel.app/#website",
+      "url": "https://rbi-belting-y8in.vercel.app/",
+      "name": "RB International Belting & Automation",
+      "description": "Industrial power transmission products, automation components and industrial adhesives supplied from Pune across India and export markets.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#organization"
+      }
+    },
+    {
+      "@type": [
+        "ContactPage",
+        "FAQPage"
+      ],
+      "@id": "https://rbi-belting-y8in.vercel.app/contact#webpage",
+      "url": "https://rbi-belting-y8in.vercel.app/contact",
+      "name": "Contact RB International Belting & Automation, Pune",
+      "description": "Send your industrial belt, automation or adhesive requirement to RB International in Bhosari, Pune. Call, email or WhatsApp our sales team today.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#website"
+      },
+      "publisher": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://rbi-belting-y8in.vercel.app/contact#breadcrumb"
+      },
+      "about": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#organization"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What details should I share for a fast quotation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Share the product type, brand preference, size or part number, quantity, machine application and delivery location. Photos of existing markings or drawings help our team identify the correct option faster."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you supply outside Pune?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. RB International supports customers across India and selected export requirements from our Bhosari, Pune base."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you help if I do not know the exact product code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Send the application, current product photo, size, pulley or machine details, and our team will help shortlist suitable belting, automation or adhesive options."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which product categories can I enquire about?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can enquire for power transmission products, automation and motion control components, industrial adhesives, MRO chemicals and related maintenance requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How quickly will your team respond?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For working-hour enquiries, the team aims to respond quickly by phone, email or WhatsApp after reviewing the requirement details."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rbi-belting-y8in.vercel.app/contact#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rbi-belting-y8in.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://rbi-belting-y8in.vercel.app/contact"
+        }
+      ]
+    }
+  ]
+}

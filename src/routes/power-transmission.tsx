@@ -7,8 +7,8 @@ export const Route = createFileRoute("/power-transmission")({
   validateSearch: (search: Record<string, unknown>) => ({
     product: typeof search["product"] === "string" ? search["product"] : undefined,
   }),
-  head: () =>
-    pageHead(
+  head: ({ matches }) =>
+    matches.at(-1)?.routeId === "/power-transmission" ? pageHead(
       "Power Transmission Belts & Drives | RB International, Pune",
       "Industrial belts, pulleys and couplings from Fenner, Gates, PIX and more. Get fast technical support and PAN India supply from Pune.",
       "/power-transmission",
@@ -16,6 +16,6 @@ export const Route = createFileRoute("/power-transmission")({
         { name: "Home", path: "/" },
         { name: p.name, path: "/power-transmission" },
       ]),
-    ),
+    ) : {},
   component: () => <CategoryPage pillar={p} />,
 });

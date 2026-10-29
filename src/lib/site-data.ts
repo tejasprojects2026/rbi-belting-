@@ -78,6 +78,23 @@ export const footerContact = {
   address: "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate, Pune 411026",
   mapUrl: "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
 };
+// Verified public company details shared by structured data. Placeholder social links are excluded.
+export const websiteIdentity = {
+  url: "https://rbi-belting-y8in.vercel.app",
+  name: "RB International Belting & Automation",
+  description: "Industrial power transmission products, automation components and industrial adhesives supplied from Pune across India and export markets.",
+  telephone: ["+918788195839", "+919890961752"],
+  email: ["response@rbibelting.in", footerContact.email],
+  socialProfiles: ["https://www.instagram.com/rbibelting/"],
+  address: {
+    streetAddress: "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate",
+    addressLocality: "Pune",
+    postalCode: "411026",
+    addressCountry: "IN",
+  },
+  openingHours: "Mo-Sa 09:30-18:30",
+};
+
 export const companyHistory = {
   eyebrow: "Milestones",
   title: "From a belting shop to three industrial divisions",

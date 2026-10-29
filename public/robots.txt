@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://rbibelting.com/sitemap.xml
+Sitemap: https://rbi-belting-y8in.vercel.app/sitemap.xml

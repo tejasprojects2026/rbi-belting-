@@ -14,7 +14,7 @@ export function JustdialReviews() {
         <h2 id="customer-reviews-title" className="sr-only">
           Customer reviews and business enquiries
         </h2>
-        <div className="grid divide-y divide-border md:min-h-[276px] md:grid-cols-2 md:divide-x md:divide-y-0">
+        <div className="grid divide-y divide-border md:grid-cols-2 md:divide-x md:divide-y-0">
           <GoogleReviewsCarousel />
           <div className="grid min-h-0 grid-rows-2 divide-y divide-border">
             {reviewPlatforms
@@ -23,7 +23,7 @@ export function JustdialReviews() {
                 <article
                   key={platform.id}
                   aria-labelledby={`reviews-${platform.id}-title`}
-                  className="grid min-w-0 grid-cols-2 items-center justify-items-center gap-x-3 px-4 py-2 text-center lg:px-6"
+                  className="grid min-w-0 grid-cols-2 content-center items-center justify-items-center gap-x-3 gap-y-2 px-4 py-2 text-center lg:px-6"
                 >
                   <p
                     className="col-start-1 row-start-1 flex h-7 items-center text-xl font-black leading-7"
@@ -106,7 +106,7 @@ function GoogleReviewsCarousel() {
   }, []);
 
   return (
-    <article className="min-w-0 px-4 py-6 lg:px-6" aria-label="Google customer reviews">
+    <article className="min-w-0 px-4 py-3 lg:px-6" aria-label="Google customer reviews">
       <div ref={containerRef} />
     </article>
   );

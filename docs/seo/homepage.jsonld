@@ -1,0 +1,71 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "LocalBusiness"
+      ],
+      "@id": "https://rbi-belting-y8in.vercel.app/#organization",
+      "name": "RB International Belting & Automation",
+      "url": "https://rbi-belting-y8in.vercel.app/",
+      "description": "RB International Belting & Automation, Pune. Authorized dealers for Gates, Fenner, PIX, Pidilite. Suppliers of V-belts, timing belts, conveyor belts, ball screws, servo motors, industrial adhesives.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rbi-belting-y8in.vercel.app/assets/rb-logo-cwZst9wj.jpeg"
+      },
+      "image": "https://rbi-belting-y8in.vercel.app/assets/rb-logo-cwZst9wj.jpeg",
+      "telephone": [
+        "+918788195839",
+        "+919890961752"
+      ],
+      "email": [
+        "response@rbibelting.in",
+        "sales@rbcorp.in"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shop No 5, Kamath Complex, Telco Road, Landewadi, Bhosari Industrial Estate",
+        "addressLocality": "Pune",
+        "postalCode": "411026",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Sa 09:30-18:30",
+      "hasMap": "https://maps.app.goo.gl/v51wGZH4o8cT1e3D8",
+      "sameAs": [
+        "https://www.instagram.com/rbibelting/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+918788195839",
+        "email": "response@rbibelting.in"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rbi-belting-y8in.vercel.app/#website",
+      "url": "https://rbi-belting-y8in.vercel.app/",
+      "name": "RB International Belting & Automation",
+      "description": "Industrial power transmission products, automation components and industrial adhesives supplied from Pune across India and export markets.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rbi-belting-y8in.vercel.app/#webpage",
+      "url": "https://rbi-belting-y8in.vercel.app/",
+      "name": "Industrial Belts, Automation & Adhesives | RB International Pune",
+      "description": "RB International supplies power transmission belts, automation components and industrial adhesives from Pune to 500+ manufacturers across India and export markets.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#website"
+      },
+      "publisher": {
+        "@id": "https://rbi-belting-y8in.vercel.app/#organization"
+      }
+    }
+  ]
+}

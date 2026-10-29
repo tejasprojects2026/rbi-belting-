@@ -1,0 +1,597 @@
+{
+  "date": "2026-10-29",
+  "origin": "https://rbi-belting-y8in.vercel.app",
+  "build": "passed",
+  "ssr": "25/25 routes passed in development and built production worker",
+  "browser": "passed hydration, SPA metadata updates, FAQ text parity and product popup behavior",
+  "schemaOrg": {
+    "validatedPages": 21,
+    "errors": 0,
+    "warnings": 0,
+    "remainingPages": [
+      "/adhesives/general-purpose",
+      "/adhesives/specialty",
+      "/adhesives/tapes",
+      "/power-transmission/caterpillar-belts"
+    ],
+    "limitation": "Further validator browser submissions timed out before a result; no external pass claimed for remaining pages."
+  },
+  "googleRichResults": {
+    "status": "external tool refused submissions",
+    "paths": [
+      "/",
+      "/contact",
+      "/power-transmission/v-belts"
+    ],
+    "message": "Something went wrong. Log in and try again.",
+    "passed": false
+  },
+  "typescript": "7 existing errors outside the SEO implementation; no new SEO errors",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "AboutPage",
+        "BreadcrumbList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/about",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/automation",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/automation",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/adhesives",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/adhesives",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "ContactPage",
+        "FAQPage",
+        "BreadcrumbList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/contact",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/franchise",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/franchise",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission/v-belts",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 4,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission/v-belts",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission/timing-belts",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission/timing-belts",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission/conveyor-belts",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 4,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission/conveyor-belts",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission/flat-belts",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission/flat-belts",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission/pulleys-and-bushes",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission/pulleys-and-bushes",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission/couplings",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission/couplings",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/power-transmission/accessories",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/power-transmission/accessories",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/automation/linear-motion",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/automation/linear-motion",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/automation/robotics",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/automation/robotics",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/automation/motors-and-drives",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/automation/motors-and-drives",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/automation/controllers",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/automation/controllers",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/adhesives/threadlockers",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/adhesives/threadlockers",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/adhesives/sealants",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/adhesives/sealants",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/adhesives/structural",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "path": "/adhesives/structural",
+        "errors": [
+          0
+        ],
+        "warnings": [
+          0
+        ]
+      }
+    },
+    {
+      "path": "/adhesives/general-purpose",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "status": "not completed externally; local validation passed"
+      }
+    },
+    {
+      "path": "/adhesives/specialty",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "status": "not completed externally; local validation passed"
+      }
+    },
+    {
+      "path": "/adhesives/tapes",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "status": "not completed externally; local validation passed"
+      }
+    },
+    {
+      "path": "/power-transmission/caterpillar-belts",
+      "status": 200,
+      "types": [
+        "Organization",
+        "LocalBusiness",
+        "WebSite",
+        "CollectionPage",
+        "BreadcrumbList",
+        "Product",
+        "ItemList"
+      ],
+      "productImages": 0,
+      "localValidation": "passed",
+      "schemaOrg": {
+        "status": "not completed externally; local validation passed"
+      }
+    }
+  ]
+}
